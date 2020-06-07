@@ -1,0 +1,20 @@
+赋值运算符: 将一个值赋给某个变量
+	=, +=, -=, /= ...
+
+条件运算符( 三元与那算符 ):
+	A  ? B  : C
+	A 为true 返回 B值
+	A 为false 返回 C值
+	简化版的 if else
+	
+程序流程:
+1. 顺序流程 ==> 从上至下执行
+2. 分支流程 ==> if   switch
+	if , if else  , if else if  else
+	switch case  break default
+3. 循环流程 ==> for(循环次数已知)  while (循环次数未知)
+	for( A ; B ; C ) { D }
+	增强for循环
+	
+	while( 条件 ) { ... }			先判断 再执行
+	do { .... } while ( 条件 );  	先执行 再判断
