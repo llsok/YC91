@@ -72,21 +72,79 @@ public class Demo3 {
 		 * 	2 偶数, 
 		 *  3 个位数, 
 		 *  4 大于  90 的数
-		 *  5. 大于平均值的数
-		 *  6  质数(只能被1和自身整除的数字)
+		 *  5 大于平均值的数
+		 *  6 质数(只能被1和自身整除的数字)
 		 */
 		// 遍历每个元素, 判断是否是奇数, 如果是就给计数器+1
 		int jishu = 0;
 		// 遍历每个元素
 		for (int i = 0; i < arr.length; i++) {
 			// 判断是否是奇数
-			if(  arr[i] % 2 == 1  ) {
-				//计数器+1
+			if (arr[i] % 2 == 1) {
+				// 计数器+1
 				jishu += 1;
 			}
 		}
 		System.out.println("奇数的数量是:" + jishu);
 
+		// 定义统计个位数的变量
+		int gwshu = 0;
+		// 遍历每个元素
+		for (int i = 0; i < arr.length; i++) {
+			// 判断是否是个位数
+			if (arr[i] < 10) {
+				// 计数器+1
+				gwshu++;
+			}
+		}
+		System.out.println("个位数的数量是:" + gwshu);
+
+		/**
+		 * 平均数
+		 */
+		int avg = sum / arr.length; // 计算平均数
+
+		System.out.println("==========判断质数===========");
+		int num = 82;
+		boolean isZhi = true; // 判断结果默认是质数
+		// 起始值应该从最小质数 2 开始
+		for (int i = 2; i < num; i++) {
+			// 判断是否整除 ==> 不是质数
+			if(num % i == 0) {
+				isZhi = false;
+				// 判断出不是,就可以不用再测试了
+				break;
+			}
+		}
+		if(isZhi) {
+			System.out.println(num + "是质数");
+		}  else {
+			System.out.println(num + "不是质数");
+		}
+		
+		
+		System.out.println("==========统计质数的数量===========");
+		int zhishu = 0;
+		for(int j = 0 ; j<arr.length; j++ ) {
+			boolean isZhi1 = true;
+			// 获取arr数组当前循环的的元素值
+			int arrValue = arr[j]; 
+			for (int i = 2; i < arrValue; i++) {
+				// 判断是否整除 ==> 不是质数
+				if(arrValue % i == 0) {
+					isZhi1 = false;
+					// 判断出不是,就可以不用再测试了
+					break;
+				}
+			}
+			// 判断是质数 那么计算器 加一
+			if(isZhi1) {
+				System.out.print(arrValue + ",");
+				zhishu ++;
+			}
+		}
+		System.out.println();
+		System.out.println("质数的数量是:" + zhishu);
 	}
 
 }
