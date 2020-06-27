@@ -26,6 +26,9 @@ public class Demo4 {
 		Flight flight = new Flight();
 		flight.sn = "NH00001";
 		flight.comany = "南航";
+		
+		flight.setPlane(plane);
+		
 		flight.setPlane(plane1);
 		
 		Client c1 = new Client("武松","430403.......", 5000);
