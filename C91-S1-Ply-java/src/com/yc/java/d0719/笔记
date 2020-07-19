@@ -1,0 +1,33 @@
+类:   	完全定义
+
+抽象类:	不完全定义 
+
+接口:    完全不定义    ==> 描述了能力的特殊类
+
+
+abstract class 类名 {
+	abstract void 方法名();  // 可以没有抽象方法
+	void 非抽象方法名(){ ... }
+}
+
+interface 接口名 {
+	// 接口可以定义属性
+	int a;		  // 默认为 共有的静态的属性 ==> public static int a
+	void 方法名();  // 方法作用域都是 public  可以没有抽象方法(标签接口)
+}
+
+接口实现语法
+class 类 implements 接口 { ... }
+class 类 implements 接口1,接口2,接口3,接口4 { ... }
+class 类 extends 父类 implements 接口1,接口2 { ... }
+interface 接口 extends 父接口1,父接口2,父接口3 { ... }
+
+
+
+
+
+
+
+
+
+
