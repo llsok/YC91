@@ -1,0 +1,13 @@
+回顾:
+1.日期类型
+	Date 表示一个时间点, 内部存放一个时间戳(1970.1.1到现在的毫秒值)
+	Calendar 日历, 时间运算 add roll set get
+	java.text.SimpleDateFormat 格式化类
+2.Arrays 数组工具类
+	sort		  	排序
+		java.lang.Comparable 对自定义类型数组进行排序
+	binarySearch  	折半查找( 依赖于排序 )
+3.Random 随机对象
+	随机对象的种子 ==> 伪随机
+
+集合:
