@@ -49,12 +49,40 @@ public class ExerciseString2 {
 			第15、16位数字表示：所在地的派出所的代码；
 			第17位数字表示性别：奇数表示男性，偶数表示女性；
 			第18位数字是校检码
-		任意给出一个身份证号码，在控制台输所有的出个人信息，
-			日期格式：xxxx年xx月xx日
-			性别：显示男，女
-			其他代码：显示原值
+		任意给出一个身份证号码，在控制台输所有的出个人信息
+			身份证: 43040320000101203X
+			省份的代码: 43
+			城市的代码: 04
+			县区的代码: 03
+			生日: 2000年01月01日
+			派出所的代码: 20
+			性别: 男
+			校验码: X
 	 */
 	public void parseId(String id) {
+		System.out.println("身份证: " + id);
+		String s1 = id.substring(0, 2);
+		String s2 = id.substring(2, 4);
+		String s3 = id.substring(4, 6);
+
+		String s4 = id.substring(6, 10);
+		String s5 = id.substring(10, 12);
+		String s6 = id.substring(12, 14);
+
+		String s7 = id.substring(14, 16);
+		String s8 = id.substring(16, 17);
+		String s9 = id.substring(17, 18);
+
+		Integer i = Integer.valueOf(s8);
+		s8 = i % 2 == 0 ? "女" : "男";
+		
+		System.out.println("省份的代码: " + s1);
+		System.out.println("城市的代码: " + s2);
+		System.out.println("县区的代码: " + s3);
+		System.out.println("生日: " + s4 + "年" + s5 + "月" + s6 + "日");
+		System.out.println("派出所的代码: " + s7);
+		System.out.println("性别: " + s8);
+		System.out.println("校验码: " + s9);
 
 	}
 
@@ -74,6 +102,8 @@ public class ExerciseString2 {
 		System.out.println(es2.getISP("15300001111"));
 		System.out.println(es2.getISP("15700001111"));
 		System.out.println(es2.getISP("17700001111"));
+		
+		es2.parseId("43040320000101203X");
 	}
 
 }
