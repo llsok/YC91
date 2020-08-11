@@ -1,0 +1,61 @@
+API
+java.lang
+	包装类
+	String, StringBuffer, StringBuiler
+	Object : toString, equals, hashCode, getClass ...
+	Class  : 类对象 (java黑科技---反射)
+	Exception : 编译期异常(感知性,强制要求处理), 运行期异常(无感知)
+	
+java.util
+	日期: Date(表示), Calendar(运算), SimpleDateFormat(展示)
+	Arrays : 数组工具类( 排序, 查找, 转换 ... )
+	集合 :
+		单列集合: Collection
+			List, Set, Queue     接口
+			ArrayList, HashSet...类
+		双列集合: Map
+			HashMap, TreeMap  ...类
+
+java.io
+	File: 表示文件和目录
+		文件属性
+		目录查询
+		建文件,目录
+		...
+	IO流: 流的命名规则 ==> 流的分类
+		出入方法分: 
+			输出: Output, Writer
+			输入: Input, Reader
+		数据格式分:
+			字节: Stream
+			字符: Reader, Writer
+		处理资源分: (与命名无关)
+			资源: 构造方法参数: 1.无参数, 2.资源名(文件,数组...)
+			处理: 构造方法参数: 另一个流
+		
+		命名顺序: 资源+方向+格式类别
+			
+		读入一个txt文件:
+		FileReader
+		读入一个jpg文件:
+		FileInputStream
+		
+		重要的流
+		FileReader
+		FileInputStream
+		ObjectOutputStream
+		BufferedOutputStream 缓冲处理流
+		InputStreamReader 	 字节流转字符流的输入流  
+		OutputStreamWriter	字节流转字符流的输出流
+	
+	
+
+瞩目助手:
+	实现课堂调查课堂回复
+	1. 导入所有的学生
+	2. 设置瞩目的聊天文件
+	3. 分析聊天记录内容
+	4. 统计回复结果
+	
+	
+	
