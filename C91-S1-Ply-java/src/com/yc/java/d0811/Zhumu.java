@@ -17,6 +17,8 @@ public class Zhumu {
 
 	// 学生集合
 	private LinkedHashSet<String> stuSet = new LinkedHashSet<>();
+	// 回复的学生
+	LinkedHashSet<String> replySet = new LinkedHashSet<>();
 	private File meetingFile;
 
 	public static void main(String[] args) {
@@ -27,6 +29,7 @@ public class Zhumu {
 		System.out.println(zm.stuSet);
 		System.out.println(zm.meetingFile);
 		zm.parse();
+		zm.count();
 	}
 
 	/**
@@ -64,7 +67,6 @@ public class Zhumu {
 	 * 分析回复的人数, 扫描所有的回复记录, 根据人名, 将回复的人名记录在一个set集合中
 	 */
 	public void parse() {
-		LinkedHashSet<String> names = new LinkedHashSet<>();
 		FileReader fr = null;
 		BufferedReader br = null;
 		try {
@@ -74,21 +76,24 @@ public class Zhumu {
 			br = new BufferedReader(fr);
 			String line;
 			while ((line = br.readLine()) != null) {
-				// 解析每行中人名  正则表达式
-				//08:57:12	         廖彦          :    swt
-				//.+?     \\n+ .+? \s:\s  .+
-				if(line.matches(".+?\\s+.+?\\s:\\s.+")) {
-					System.out.println(line);
+				// 解析每行中人名 正则表达式
+				// 08:57:12 廖彦 : swt
+				// .+? \n+ .+? \s:\s .+
+				if (line.matches(".+?\\s+.+?\\s:\\s.+")) {
+					// 提取行中的人名
 					String name = line.replaceAll(".+?\\s+(.+?)\\s:\\s.+", "$1");
-					System.out.println(name);
+					/**
+					 * 提取人名中的汉字 (复杂) ==> 剔除人名中符号和数字字母  \\w 字母数字_
+					 */
+					name = name.replaceAll("[\\w-\\s]", "");
 					// 记录到set集合
-					names.add(name);
+					replySet.add(name);
 				}
 			}
-			System.out.println(names);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
+			// 关闭资源流就可以了
 			IOHelper.close(fr); // 减少代码冗余
 		}
 	}
@@ -97,7 +102,15 @@ public class Zhumu {
 	 * 统计回复结果
 	 */
 	public void count() {
-
+		System.out.println("回复人数" + replySet.size() + " : " + replySet);
+		//挂机人数  从 学生set 中 排除已经回复的学生
+		LinkedHashSet<String> stuSet = new LinkedHashSet<>();
+		// 将实例变量stuSet的元素, 添加到局部变量stuSet 中
+		stuSet.addAll(this.stuSet);
+		stuSet.removeAll(replySet);
+		System.out.println("挂机人数" + stuSet.size() + " : " + stuSet);
+		// 扩展: 统计访客人数
+		System.out.println("访客人数??? : ???");
 	}
 
 }
