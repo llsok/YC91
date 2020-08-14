@@ -1,0 +1,54 @@
+JDBC java数据库连接组件
+
+java.sql JDBC包
+
+1. 加载驱动
+	引入数据库jar包
+	Class.forName()
+	
+2. 获取连接
+	url : 连接数据库的字符串(地址信息) 
+	Connection conn = DriverManager.getConnection(url,user,password)
+	
+3. 创建语句
+	conn.createStatment(sql) ; // 创建普通语句对象 ==> SQL注入攻击
+	conn.prepareStatment();    // 创建预编译语句对象
+	PreparedStatment ps;
+	
+4. 执行语句
+	String sql = "select * from A where a=? and b=?";
+	? ==> 参数占位符
+	ps.setXXX( 占位符编号(从1开始) ,   参数值);
+	有几个 ? 就要 setXXX 几次
+	
+	executeUpdate ==> 返回 int 值  执行除增删改以外所有语句
+	executeQuery  ==> 返回 ResultSet 对象 , 只执行查询
+	
+	ResultSet.next();
+	ResultSet.getXXX();
+	 
+5. 关闭连接
+	rs.close();
+	ps.close();
+	conn.close();
+	
+
+1.入门
+2.封装
+	简化jdbc操作代码
+3.高级
+
+
+案例
+查询 deptno = 10 的部门
+
+作业:
+完成 count, getValue 两个方法的封装
+	
+	
+	
+	
+	
+	
+	
+	
