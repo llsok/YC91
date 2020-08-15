@@ -22,6 +22,8 @@ public class DBHelper {
 
 	public DBHelper() throws SQLException {
 		conn = getConnection();
+		// 禁止自动提交
+		conn.setAutoCommit(false);
 	}
 
 	/**
@@ -106,7 +108,7 @@ public class DBHelper {
 		List<Map<String, Object>> list = select(sql, param);
 		return list.size() == 0 ? null : list.get(0);
 	}
-	
+
 	/**
 	 * 	返回当前sql查询的结果的数量
 	 * @param sql
@@ -115,9 +117,10 @@ public class DBHelper {
 	 * @throws SQLException
 	 */
 	public int count(String sql, Object... param) throws SQLException {
-		return 0;
+		// 得分 60
+		return select(sql, param).size();
 	}
-	
+
 	/**
 	 * 	查询一个数值
 	 * 	例如: select max(sal) form emp;
@@ -128,9 +131,67 @@ public class DBHelper {
 	 * @throws SQLException
 	 */
 	public Object getValue(String sql, Object... param) throws SQLException {
-		return 0;
+		// 100
+		// 获取唯一的一条记录
+		Map<String, Object> row = select(sql, param).get(0);
+		// 获取值的集合
+		Collection<Object> values = row.values();
+		// 通过迭代器获取第一个元素
+		return values.iterator().next();
 	}
-
+	
+	/**
+	 * 分页查询
+	 * @param sql	select 语句
+	 * @param page	第几页
+	 * @param rows	每页行数
+	 * 			1 ~ 5		1	5
+	 * 			6 ~ 10		2	5
+	 * 			11 ~ 15		3	5
+	 * 		5 * (1 - 1) + 1 = 1
+	 * 		5 * (2 - 1) + 1 = 6
+	 * 
+	 * @param param	查询参数
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Map<String, Object>> selectPage(
+			String sql, int page, int rows, Object... param) throws SQLException {
+		int startRow = rows * (page - 1) + 1;
+		int endRow = page * rows;
+		String pageSql = "select *\n" +
+				"  from (select a.*, rownum rn\n" + 
+				"          from (" + sql + ") a\n" + 
+				"         where rownum <= " + endRow + ")\n" + 
+				" where rn >= " + startRow;
+		return select(pageSql, param);
+	}
+	
+	/**
+	 * 提交数据
+	 */
+	public void commit() {
+		try {
+			conn.commit();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * 回滚数据
+	 */
+	public void rollback() {
+		try {
+			conn.rollback();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	/**
+	 * 关闭连接
+	 */
 	public void close() {
 		try {
 			conn.close();
