@@ -16,7 +16,40 @@ public class DBHelperTest {
 	 * 	1. 将 A 账户的资金转入B转换   (基本功能)
 	 * 	2. 实现校验, 转出的金额不能大于 A 账户的金额, 如何判断?
 	 */
-	
+	@Test
+	public void testTransfer() {
+		String sql1 = "update bank_account set balance = balance + ? where id = ?";
+		String sql2 = "insert into bank_oprecord values ( bank_seq.nextval, ? , ? , sysdate)";
+		DBHelper dbh = null;
+		try {
+			/**
+			 * 假设 A 账号的id = 1, B账号的id = 2
+			 */
+			dbh = new DBHelper();
+			/**
+			 * 实现校验, 转出的金额不能大于 A 账户的金额, 如何判断?
+			 */
+			String sql = "select * from where id=? and balnace>=?";
+			if( dbh.count(sql, 1, 1000) == 0) {
+				System.out.println("金额不足");
+				return;
+			}
+			if (dbh.update(sql1, - 1000, 1) == 1) {
+				dbh.update(sql2, 1, - 1000);
+				if (dbh.update(sql1, 1000, 2) == 1) {
+					dbh.update(sql2, 2, 1000);
+				}	
+			}
+			// 正常情况下要提交
+			dbh.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 异常情况下要回滚
+			dbh.rollback();
+		} finally {
+			dbh.close();
+		}
+	}
 
 	/**
 	 * 测试数据库事务( Transactional )的方法
