@@ -79,6 +79,9 @@ public class PbWin {
 				} else if (e.keyCode == 16777220) {
 					pg.moveRight();
 				}
+				if (pg.isYouWin()) {
+					pg.next();
+				}
 				refresh();
 			}
 		});
