@@ -11,7 +11,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.yc.scott.bean.Dept;
 import com.yc.scott.dao.DeptDao;
+import com.yc.scott.util.SwtHelper;
 
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Table;
@@ -68,6 +70,30 @@ public class DeptCmp extends Composite {
 		btnAdd.setText("新增");
 
 		Button btnMod = new Button(composite, SWT.NONE);
+		btnMod.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				if (table.getSelectionCount() == 0) {
+					SwtHelper.mssage("请选择要修改的记录", getShell());
+					return;
+				} else {
+					// 获取中的记录
+					TableItem ti = table.getSelection()[0];
+					String deptno = ti.getText(0);
+					String dname = ti.getText(1);
+					String loc = ti.getText(2);
+					int iDeptno = Integer.parseInt(deptno);
+					// 创建实体对象, 传入表格当前选择行的数据
+					Dept dept = new Dept(iDeptno, dname, loc);
+					boolean res = (boolean) new DeptWin(getShell(), SWT.NONE, dept).open();
+					if (res) {
+						query();
+					}
+				}
+
+			}
+		});
 		btnMod.setLayoutData(new RowData(51, SWT.DEFAULT));
 		btnMod.setText("修改");
 

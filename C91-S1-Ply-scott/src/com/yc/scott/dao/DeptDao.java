@@ -29,9 +29,21 @@ public class DeptDao {
 			dbh.close();
 		}
 	}
+	
+	public int update(String deptno, String dname, String loc) throws SQLException {
+		// 业务潜规则 : 一般情况下不修改主键值
+		String sql = "update dept set dname=?,loc=? where deptno=?";
+		DBHelper dbh = null;
+		try {
+			dbh = new DBHelper();
+			return dbh.update(sql, dname, loc, deptno);
+		} finally {
+			dbh.close();
+		}
+	}
 
 	/**
-	 * 判断指定部门是否已经存在
+	 * 新增: 判断指定部门是否已经存在
 	 * @param dname
 	 * @return
 	 * @throws SQLException
@@ -42,6 +54,24 @@ public class DeptDao {
 		try {
 			dbh = new DBHelper();
 			return dbh.count(sql, dname);
+		} finally {
+			dbh.close();
+		}
+	}
+	
+	/**
+	 * 新增: 判断指定部门是否已经存在, 要排除自己的名称
+	 * @param dname
+	 * @param deptno
+	 * @return
+	 * @throws SQLException
+	 */
+	public int countByDname(String dname, String deptno) throws SQLException {
+		String sql = "select * from dept where dname=? and deptno!=?";
+		DBHelper dbh = null;
+		try {
+			dbh = new DBHelper();
+			return dbh.count(sql, dname, deptno);
 		} finally {
 			dbh.close();
 		}
