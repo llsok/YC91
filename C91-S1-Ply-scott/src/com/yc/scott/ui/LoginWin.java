@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.yc.scott.biz.BizException;
 import com.yc.scott.biz.UserBiz;
+import com.yc.scott.util.SwtHelper;
 
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -44,6 +45,8 @@ public class LoginWin {
 		createContents();
 		shell.open();
 		shell.layout();
+		//窗口居中
+		SwtHelper.center(shell);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();

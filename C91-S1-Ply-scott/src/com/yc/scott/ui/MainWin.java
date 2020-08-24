@@ -9,8 +9,12 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.TabItem;
+
+import com.yc.scott.util.SwtHelper;
+
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class MainWin {
 
@@ -38,6 +42,8 @@ public class MainWin {
 		createContents();
 		shell.open();
 		shell.layout();
+		//窗口居中
+		SwtHelper.center(shell);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -50,7 +56,7 @@ public class MainWin {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(524, 383);
+		shell.setSize(524, 391);
 		shell.setText("SWT Application");
 		shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 
@@ -131,11 +137,12 @@ public class MainWin {
 		menuItem_10.setText("部门调整");
 
 		TabItem tabItem_1 = new TabItem(tabFolder, SWT.NONE);
-		tabItem_1.setText("员工管理");
+		tabItem_1.setText("首页");
 
 		Label label_1 = new Label(tabFolder, SWT.NONE);
+		label_1.setImage(SWTResourceManager.getImage(MainWin.class, "/com/yc/scott/ui/beijing.jpg"));
+		label_1.addPaintListener(new SwtLabelPaintListner());
 		tabItem_1.setControl(label_1);
-		label_1.setText("员工");
 
 	}
 }
