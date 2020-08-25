@@ -3,15 +3,11 @@ package com.yc.scott.biz;
 import java.sql.SQLException;
 
 import com.yc.scott.bean.JobChange;
-import com.yc.scott.dao.DeptDao;
 import com.yc.scott.dao.JobChangeDao;
-import com.yc.scott.dao.UserDao;
 
 public class JobChangeBiz {
 	
 	private JobChangeDao jdao = new JobChangeDao();
-	// EmpDao
-	private UserDao udao = new UserDao();
 	
 	/**
 	 * 复杂的数据操作, 包括 2次 修改数据库的操作

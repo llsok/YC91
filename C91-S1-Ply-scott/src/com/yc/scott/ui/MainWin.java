@@ -42,7 +42,7 @@ public class MainWin {
 		createContents();
 		shell.open();
 		shell.layout();
-		//窗口居中
+		// 窗口居中
 		SwtHelper.center(shell);
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
@@ -103,8 +103,8 @@ public class MainWin {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// 判断是否已经打开
-				for( TabItem ti : tabFolder.getItems()) {
-					if("部门管理".equals(ti.getText())){
+				for (TabItem ti : tabFolder.getItems()) {
+					if ("部门管理".equals(ti.getText())) {
 						// 如果已开, 那么就选中该页
 						tabFolder.setSelection(ti);
 						return;
@@ -128,6 +128,15 @@ public class MainWin {
 		menuItem_7.setMenu(menu_3);
 
 		MenuItem menuItem_8 = new MenuItem(menu_3, SWT.NONE);
+		menuItem_8.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				/**
+				 * 打开岗位调整窗口
+				 */
+				new JobChangeWin(shell, SWT.NONE).open();
+			}
+		});
 		menuItem_8.setText("岗位调整");
 
 		MenuItem menuItem_9 = new MenuItem(menu_3, SWT.NONE);

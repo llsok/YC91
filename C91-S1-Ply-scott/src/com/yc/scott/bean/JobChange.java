@@ -16,7 +16,7 @@ public class JobChange implements java.io.Serializable{
 	private Float newsal;
 	private String cause;
 	private Timestamp createtime;
-	private String allow;
+	private Integer allow;
 
 	public Integer getId() {
 		return id;
@@ -82,11 +82,11 @@ public class JobChange implements java.io.Serializable{
 		this.createtime = createtime;
 	}
 
-	public String getAllow() {
+	public Integer getAllow() {
 		return allow;
 	}
 
-	public void setAllow(String allow) {
+	public void setAllow(Integer allow) {
 		this.allow = allow;
 	}
 
