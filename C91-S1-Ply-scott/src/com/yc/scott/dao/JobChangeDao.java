@@ -13,7 +13,7 @@ public class JobChangeDao {
 		 */
 		String sql1 = "insert into Job_Change values (seq_scott.nextval,"
 				+ "?,?,?,?,?,?,sysdate,?)";
-		String sql2 = "update emp set job=?, sal=? where empnno=?";
+		String sql2 = "update emp set job=?, sal=? where empno=?";
 
 		DBHelper dbh = null;
 		try {
