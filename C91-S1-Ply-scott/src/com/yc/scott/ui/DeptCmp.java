@@ -30,6 +30,7 @@ public class DeptCmp extends Composite {
 
 	// 部门Dao对象
 	private DeptDao ddao = new DeptDao();
+	private Text text_1;
 
 	/**
 	 * Create the composite.
@@ -48,11 +49,22 @@ public class DeptCmp extends Composite {
 		composite.setLayout(rl_composite);
 
 		Label label = new Label(composite, SWT.NONE);
-		label.setText("部门名");
+		label.setText("部门名:");
 
 		text = new Text(composite, SWT.BORDER);
+		
+		Label label_1 = new Label(composite, SWT.NONE);
+		label_1.setText("地址:");
+		
+		text_1 = new Text(composite, SWT.BORDER);
 
 		Button button = new Button(composite, SWT.NONE);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				query();
+			}
+		});
 		button.setLayoutData(new RowData(53, SWT.DEFAULT));
 		button.setText("查询");
 
@@ -123,7 +135,10 @@ public class DeptCmp extends Composite {
 
 	public void query() {
 		try {
-			List<Map<String, Object>> list = ddao.selectAll();
+			String dname = text.getText();
+			String loc = text_1.getText();
+			Dept d = new Dept(0, dname, loc);
+			List<Map<String, Object>> list = ddao.selectByDept(d);
 			// System.out.println(list.size());
 			// System.out.println(list);
 			// 参数表格中原有的数据
