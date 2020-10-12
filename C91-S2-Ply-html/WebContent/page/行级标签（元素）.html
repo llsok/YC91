@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>行级标签（元素）</title>
+</head>
+<body id="top">
+<!-- 地址： 外部（网上的图片）地址， 内部（当前工程）地址 part-00655-3932.jpg  
+	默认显示原始高宽度
+	如果只设置高度或宽度，那么图片会等比缩放
+	如果同时设置高宽，会出现拉伸效果
+-->
+<h1>img</h1>
+<img src="part-00655-3932.jpg" height="300px">
+
+<img  width="150px" src="http://txt22262.book118.com/2017/0706/book120580/120579206.jpg">
+
+<h1>span</h1>
+span 用于放置文字信息<br>
+<span style="color:red;font-size: 50px;">span 用于放置文字信息</span>
+
+<h1>超链接  a 标签</h1>
+
+	<a href="#javaimg">
+		页面导航==》 点击超链接跳转到页面的指定位置
+	</a><br>
+	
+	<a href="http://www.baidu.com">
+		跳转到百度
+	</a><br>
+	
+	<!-- 默认跳转当前目录下的页面   行级标签（元素）.html  位于 根目录，login 位于 user-->
+	<a href="user/login.html">
+		去登录
+	</a><br>
+	
+	<!--  index 位于 page目录，行级标签（元素）.html 位于根目录-->
+	<a href="../login.html">
+		去登录
+	</a><br>
+
+
+	<a href="mailto:306529917@qq.com">
+		发送邮件给306529917@qq.com
+	</a><br>
+
+
+
+<div style="height: 500px"></div>
+
+<!-- id 表示元素的唯一标识值 -->
+<img id="javaimg" src="http://img2.imgtn.bdimg.com/it/u=1785306811,2930502059&fm=26&gp=0.jpg">
+
+
+<a href="#top">回到顶部</a>
+
+
+
+</body>
+</html>
