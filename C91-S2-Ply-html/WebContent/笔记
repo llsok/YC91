@@ -48,8 +48,8 @@ HTML 标签构成
 		br		换行
 	2）布局（定位）标签
 		列表：ul（无序号列表）， ol（带序号列表）
-		描述
-		表格
+		描述： dl ， dt  dd
+		表格： table tr th td  thead  tbody
 		DIV（层）
 	
 2. 行级标签
