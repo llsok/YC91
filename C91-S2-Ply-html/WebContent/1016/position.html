@@ -2,53 +2,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>position定位</title>
 <style type="text/css">
-.main{
-	width:800px;
-	height:600px;
-	background-color: #eee
-}
 
-.top{
-	width:800px;
-	height:60px;
-	background-color: #ddd
-}
-
-.left{
-	width:200px;
+.b{
+	width:500px;
 	height:400px;
-	background-color: #ccc;
-	/* 浮动靠左 */
-	float: left
+	background-color: #eee;
+	padding: 50px 100px;
+	position: fixed;
 }
 
-.center{
-	width:600px;
-	height:400px;
-	background-color: #bbb;
-	/* 浮动靠右 */
-	float: right
-} 
-
-.bottom{
-	width:800px;
-	height:60px;
-	background-color: #f00;
-	clear:both;
+.b>button{
+	/* 
+		inherit 继承
+		static  静态，元素服从文档流的默认的定位设置（默认）
+		relative 相对静态的位置 设置定位, 不脱离文档流， 原有占据空间保留
+		absolute 绝对定位，元素脱离文档流， 原有占据空间被收回
+				父容器的定位方式必须是  非 static
+				该元素的定位以父元素为起始坐标
+		fixed    固定定位，脱离文档流
+	
+	*/
+	position: absolute;
+	right: 100px
 }
+
+.a{
+	width:100px;
+	height:100px;
+	background-color: blue;
+	display: inline-block;
+}
+
 
 
 </style>
+
 </head>
 <body>
-<div class="main">
-	<div class="top">页头</div>
-	<div class="left">左边</div>
-	<div class="center">中间</div>
-	<div class="bottom">页脚</div>
-</div>
+	<div class="b">
+		这个 <button>按钮</button>  很调皮
+		
+		<div class="a">测试</div>	
+		
+	</div>
 
 
 </body>
