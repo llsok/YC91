@@ -99,7 +99,9 @@ CSS 盒子模型
 
 
 CSS 定位
-
+	1. float 浮动
+	2. position 定位
+	3. display 显示
 
 
 
