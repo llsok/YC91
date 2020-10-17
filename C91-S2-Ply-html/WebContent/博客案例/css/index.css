@@ -86,12 +86,45 @@ main{
 	margin-top: 10px
 }
 
+/* 推荐文章 */
+.carousel>img{
+	width:890px;
+}
+
+.carousel{
+	width:890px;
+	height: 300px;
+	overflow: hidden;
+}
+
+.tuijian>div:nth-child(2){
+	background-color: #1C2327;
+	color: #fff;
+	padding: 10px
+}
 
 
+/* 小的推荐文章 */
+.small, .small>.carousel, .small>.carousel>img{
+	width:280px;
+}
 
+.small>.carousel{
+	height:150px
+}
 
+.small{
+	display:inline-block;
+}
 
+.small:nth-child(2),.small:nth-child(3){
+	margin-right: 20px
+}
 
+/* 添加 left 内部元素的下外边距， 产生间距效果 */
+.left>div{
+	margin-bottom: 10px
+}
 
 
 
