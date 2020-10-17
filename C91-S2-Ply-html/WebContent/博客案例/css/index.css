@@ -126,6 +126,30 @@ main{
 	margin-bottom: 10px
 }
 
+/* 页脚（注脚）*/
+footer>div{
+	width:1200px;
+	color: #fff;
+	display: inline-block;
+	height: 50px;
+	line-height:50px;  /* 纯文字的垂直居中，要用到该属性 */
+	text-align: left;
+}
+
+footer>div *{
+	vertical-align: middle;
+}
+
+footer>div span{
+	font-weight: bold;
+}
+
+footer{
+	background: #000 ;/*简写模式*/
+	text-align: center;
+}
+
+
 
 
 
