@@ -1,9 +1,16 @@
 @charset "UTF-8";
 
+/* 清空 ul ， li 的内外边距  */
+ul,li{
+	margin: 0px;
+	padding: 0px;
+}
+
 /*页头*/
 header{
 	height: 120px;
-	background-color: #eee
+	background-color: #eee;
+	background-image: url(../imgs/headerbg.jpg)
 }
 
 /*页脚*/
@@ -11,7 +18,7 @@ footer{
 	height: 50px;
 	background-color: #ddd;
 	clear:both;
-	margin-top: 60px
+	margin-top: 60px; /* 产生与主体部分的间距 */
 }
 
 main{
@@ -32,6 +39,52 @@ main{
 	background-color: #aaa
 }
 
+
+.menu{
+	background-color: #000;
+}
+
+.menu>div{
+	width: 1200px;
+	margin: 0px auto;
+	color: #fff;
+}
+
+.menu>div>* {
+	vertical-align: middle;  /*设置内部所有元素垂直居中*/
+}
+
+/* 将菜单 ul + li 修改成行内块   */
+.menu>div>ul , .menu>div li {
+	display: inline-block;
+}
+
+/* :hover 鼠标悬停选择器（伪类选择器的一种）*/
+.menu>div li:hover{
+	background-color: #999;
+}
+
+.menu>div li{
+	padding: 15px	
+}
+
+.menu>div li:nth-child(5){
+	margin-right: 100px
+}
+
+.menu>div input{
+	width: 262px;
+	height: 30px;
+	background-color: rgba(0,0,0,0);
+	border-width: 0px 0px 3px 0px;
+	border-color: #fff;
+	border-style: solid;
+	background-image: url(../imgs/icon/search.png);
+	background-repeat: no-repeat;
+	background-position: right;
+	float: right;
+	margin-top: 10px
+}
 
 
 
