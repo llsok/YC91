@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/*页头*/
+header{
+	height: 120px;
+	background-color: #eee
+}
+
+/*页脚*/
+footer{
+	height: 50px;
+	background-color: #ddd;
+	clear:both;
+	margin-top: 60px
+}
+
+main{
+	width: 1200px;
+	margin: 20px auto; /*左右外边距：自动==》居中*/
+	background-color: #ccc;
+}
+
+.left {
+	float: left;
+	width: 890px;
+	background-color: #bbb
+}
+
+.right {
+	float: right;
+	width: 290px;
+	background-color: #aaa
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
