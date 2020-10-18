@@ -223,6 +223,55 @@ footer{
 }
 
 
+/* 文章列表*/
+.alist{
+	width: 435px;
+	background-color: #fff;
+	border-radius: 5px;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.alist>div>span{
+	display: inline-block;
+	margin: 10px
+}
+
+.alist>div>span:nth-child(1){
+	border-left: 6px #333 solid;
+	padding-left: 5px
+}
+
+.alist>div>span:nth-child(2){
+	float: right;
+	text-decoration: underline; /*文字下划线*/
+}
+
+/* 鼠标悬停变手 */
+.alist>div>span:nth-child(2):hover{
+	cursor: pointer;
+}
+
+.alist>div{
+	background-color: #ddd
+}
+
+/*  修改 网页中所有的超链接  */
+a{
+	text-decoration: none;
+	color: #333	
+}
+
+/* 行分割线 */
+.alist td {
+	border-bottom: 1px dashed #999;
+	padding: 10px 0px;
+	font-size: 0.6em;
+	box-sizing: border-box;
+}
+
+
+
 
 
 
