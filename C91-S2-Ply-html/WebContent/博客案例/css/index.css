@@ -153,7 +153,8 @@ footer{
 /*   博客信息板块     */
 .blog-info{
 	background-color: #fff;
-	border-radius: 5px
+	border-radius: 5px;
+	overflow: hidden; /* 溢出隐藏，实现圆角 */
 }
 
 .blog-info>div:nth-child(1)>img{
@@ -217,7 +218,7 @@ footer{
 
 
 /*修改页面总体背景*/
-.right, body {
+.left, .right, body {
 	background-color: #eee
 }
 
