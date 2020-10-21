@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>案例01</title>
+<style type="text/css">
+body {
+	text-align: center;
+	margin: 50px auto
+}
+
+fieldset {
+	width: 200px;
+	height: 200px;
+	margin: 10px;
+	display: inline-block;
+	padding: 10px
+}
+
+legend {
+	text-align: left;
+	font-size: 1em;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<fieldset>
+		<legend>请点击灯泡</legend>
+		<img id="img" src="images/pic_bulboff.gif" onclick="changeimg()"><br>
+	</fieldset>
+</body>
+<script type="text/javascript">
+function changeimg(){
+	// js 中 标签的id 可以直接当成 js 变量来使用
+	// alert(img.src);  this 关键字在函数不表示当前标签
+	if(img.src.indexOf('images/pic_bulboff.gif')>=0){
+		img.src='images/pic_bulbon.gif' 
+	} else {
+		img.src='images/pic_bulboff.gif' 
+	}
+}
+</script>
+
+
+
+
+</html>
