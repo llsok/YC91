@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html  onmousemove="move(event)">
 <head>
 <meta charset="utf-8">
 <title>会动的鱼</title>
@@ -9,5 +9,20 @@
 	<!--  注意页面元素默认是相对位置定位的，所以要改成绝对位置-->
 	<img style="position:absolute;left:0px;top:0px;" id="fish" src="fish.gif" width="80" height="80" />
 </body>
+
+<script type="text/javascript">
+function move(e){
+	console.info(e);
+	var x = event.clientX;
+	var y = event.clientY;
+	fish.style.left = (x - 12) + "px";
+	fish.style.top = (y - 40) + "px";
+}
+
+/* 扩展，请使用键盘的上下左右控制鱼的游动方向  */
+
+
+
+</script>
 
 </html>
