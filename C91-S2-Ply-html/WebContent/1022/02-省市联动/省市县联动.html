@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>省市县联动</title>
+<style type="text/css">
+select{
+	width:100px
+}
+</style>
+<script type="text/javascript" src="js/省市.js"></script>
+<script type="text/javascript">
+function init(){
+	// 对省下拉框添加选项
+	var options = "";
+	for(var i=0; i<provinces.length; i++){
+		options += "<option>"+provinces[i]+"</option>";
+	}
+	// JS 是 解释执行的语言
+	sheng.innerHTML = options;
+	
+	// citys[1] ==> 返回一维数组
+	// countys[0] ==> 返回二维数组
+	// countys[1][0] ==> 返回一维数组
+	// countys[1][0]
+	
+	var options = "";
+	for(var i=0; i<citys[0].length; i++){
+		options += "<option>"+citys[0][i]+"</option>";
+	}
+	// JS 是 解释执行的语言
+	shi.innerHTML = options;
+	
+	var options = "";
+	for(var i=0; i<countys[0][0].length; i++){
+		options += "<option>"+countys[0][0][i]+"</option>";
+	}
+	// JS 是 解释执行的语言
+	xian.innerHTML = options;
+	
+}
+
+function selectSheng(){
+	// 获取当前选中省的索引
+	var pIndex = sheng.selectedIndex;
+	// 将该省下的市更新到下拉框中
+	var options = "";
+	for(var i=0; i<citys[pIndex].length; i++){
+		options += "<option>"+citys[pIndex][i]+"</option>";
+	}
+	shi.innerHTML = options;
+	// 更新县
+	selectShi();
+}
+
+function selectShi(){
+	// 获取当前选中省的索引
+	var pIndex = sheng.selectedIndex;
+	// 获取当前选中市的索引
+	var cIndex = shi.selectedIndex;
+	// 将该城市下的县更新到下拉框中
+	var options = "";
+	for(var i=0; i<countys[pIndex][cIndex].length; i++){
+		options += "<option>"+countys[pIndex][cIndex][i]+"</option>";
+	}
+	xian.innerHTML = options;
+}
+
+function test(){
+	console.info("=========innerHTML========");
+	console.info(sheng.innerHTML);
+	console.info("=========outerHTML========");
+	console.info(sheng.outerHTML);
+	console.info("=========innerText========");
+	console.info(sheng.innerText);
+	console.info("=========outerText========");
+	console.info(sheng.outerText);	
+}
+
+
+</script>
+</head>
+<body onload="init()">
+<div id="main">
+	省:<select id="sheng" onchange="selectSheng()"></select>
+	市:<select id="shi" onchange="selectShi()"></select>
+	县:<select id="xian"></select>
+	<button onclick="test()">测试</button>
+</div>
+</body>
+</html>
