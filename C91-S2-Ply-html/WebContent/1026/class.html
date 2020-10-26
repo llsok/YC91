@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	function Hero(name,age) {
+		this.name = name;
+		this.age = age;
+		this.play = function(){
+			alert("happy " + this.name + "  " + this.age); 
+		}
+	}
+	
+	var lz = new Hero("李忠",40);
+	var lk = new Hero("李逵",38);
+	var ws = new Hero("武松");
+	
+	lz.play();
+	lk.play();
+	ws.play();
+
+
+
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

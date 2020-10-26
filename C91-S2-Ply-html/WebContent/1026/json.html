@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+// 如何创建 js 对象
+var s = new String();
+var b = new Boolean();
+
+// 动态定义对象属性和方法
+var o = new Object();  // 全局
+o.name = "张三";
+o.age = 18;
+o.play = function(){
+	alert("happy " + o.name);
+}
+
+// JSON {} ==> 对象， [] ==> 数组， ,==>分隔元素, : ==> =
+var o = {
+	name : '李四',
+	age  : 28,
+	play : function(){
+		alert("happy " + o.name);
+	}
+}
+
+// 循环对象属性， 通过[] 运算符打印属性值
+for( var a in o ) {
+	console.info( a + " = " + o[a] )
+}
+
+/**
+ * 定义函数的方式
+ */
+function a(){}
+var a = function(){}
+
+
+function jsToJson(){
+	
+	var json = JSON.stringify(o);
+	
+	alert(json);
+	
+}
+
+
+function jsonToJs1(){
+	
+	var json = ' { "name":"李忠", "age":40 , "isHero": false }  ';
+	
+	var hero = JSON.parse( json );
+	
+	console.info(hero);
+	
+}
+
+function jsonToJs2(){
+	
+	var jsonScript = ' var hero = { "name":"李逵", "age":38 , "isHero": false } ; ';
+	
+	eval(jsonScript);
+	
+	console.info(hero);
+	
+}
+
+
+
+</script>
+</head>
+<body>
+<h1>JSON</h1>
+<button onclick="o.play()">测试</button>
+
+<button onclick="jsToJson()">JS => JSON</button>
+<button onclick="jsonToJs1()">JSON => JS 1</button>
+<button onclick="jsonToJs2()">JSON => JS 2</button>
+</body>
+</html>
