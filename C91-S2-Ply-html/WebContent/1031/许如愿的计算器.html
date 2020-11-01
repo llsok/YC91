@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>计算器</title>
+</head>
+<script type="text/javascript">
+    function Cal() {
+        this.display = 0;
+
+        this.number1 = 0;
+        this.number2 = 0;
+        this.operator = ""; //+ - * /
+        this.result = 0; //结果
+        //加法
+        this.add = function () {
+            this.number2 = this.display;
+            this.result = this.number1 + this.number2;
+        }
+        //减法
+        this.sub = function () {
+            this.number2 = this.display;
+            this.result = this.number1 - this.number2;
+        }
+
+        //乘法
+        this.ride = function () {
+            this.number2 = this.display;
+            this.result = this.number1 * this.number2;
+        }
+        //除法
+        this.except = function () {
+            this.number2 = this.display;
+            this.result = this.number1 / this.number2;
+        }
+
+        this.number = function (num) {
+            this.display = this.display * 10 + Number(num);
+        }
+
+        //按下 =
+        this.comput = function () {
+
+            if (this.operator === "+") {
+                this.add();
+            }
+            if (this.operator === "-") {
+                this.sub();
+            }
+            if (this.operator === "*") {
+                this.ride();
+            }
+            if (this.operator === "/") {
+                this.except();
+            }
+
+        }
+
+        //按下 + - * /
+        this.operate = function (open) {
+            this.operator = open;
+            this.number1 = this.display;
+            this.display = 0;
+        }
+
+        this.c = function () {
+            this.number1 = 0;
+            this.number2 = 0;
+            this.operator = ""; //+ - * /
+            this.result = 0; //结果
+            this.display = 0;
+        }
+    }
+
+    var cal = new Cal();
+    var mp3 = "7571.mp3";
+    var mp3 = new Audio(mp3);
+
+
+    //按下数字
+    function onNumber(e) {
+        mp3.play();
+        var btn = e.srcElement;
+        var str = btn.innerText;
+        var num = parseInt(btn.innerText);
+        console.info(num);
+        // if (str.indexOf(".")>=1){
+        //     num = num /10;
+        //     console.info(num);
+        // }
+
+
+        //console.info(num);
+        cal.number(num);
+        res.innerText = cal.display;
+    }
+
+    //按下运算符
+    function onOperate(e) {
+        mp3.play();
+        var btn = e.srcElement;
+        var operat = btn.innerText; //获取按的运算符
+        res.innerText = 0;
+        cal.operate(operat);
+        //console.info(cal.operator);
+
+    }
+
+    //按 =
+    function onComput() {
+        var mp31 = "2862.mp3";
+        var mp31 = new Audio(mp31);
+        mp31.play();
+        cal.comput()
+        console.info(cal.number1 + " " + cal.operator + " " + cal.number2 + "=" + cal.result);
+        res.innerText = cal.result;
+        cal.display = cal.result;
+        cal.number2 = 0;
+    }
+
+    //按下 c
+    function C() {
+        mp3.play();
+        cal.c();
+        res.innerText = cal.result;
+    }
+
+    // 按下<-
+    function fun() {
+        mp3.play();
+        var str = String(cal.display);
+        if (str.length == 1) {
+            cal.display = 0;
+            res.innerText = 0;
+            return;
+        } else if (str !== "0") {
+            str = str.substr(0, str.length - 1);
+            var num = parseInt(str);
+            cal.display = num;
+            res.innerText = num;
+        } else {
+            return;
+        }
+    }
+
+    function XiaoShuDian() {
+        mp3.play();
+        alert("有问题")
+        return ;
+        var str = String(cal.display);
+
+        if ((str.split(".").length - 1) >= 1) {
+            alert("小数点点多了")
+        } else {
+            str =str + "."
+        }
+        console.info(str)
+
+
+        res.innerText = str;
+
+    }
+
+    function no() {
+        mp3.play();
+       alert("没做")
+    }
+
+</script>
+
+
+<body>
+<table style="border: 1px solid #000;">
+    <tr>
+        <td colspan="4" id="res">0</td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="C()">C</button>
+        </td>
+        <td>
+            <button onclick="no()">+/-</button>
+        </td>
+        <td>
+            <button onclick="fun()">&lt;-</button>
+        </td>
+        <td>
+            <button onclick="onOperate(event)">/</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="onNumber(event)">7</button>
+        </td>
+        <td>
+            <button onclick="onNumber(event)">8</button>
+        </td>
+        <td>
+            <button onclick="onNumber(event)">9</button>
+        </td>
+        <td>
+            <button onclick="onOperate(event)">*</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="onNumber(event)">4</button>
+        </td>
+        <td>
+            <button onclick="onNumber(event)">5</button>
+        </td>
+        <td>
+            <button onclick="onNumber(event)">6</button>
+        </td>
+        <td>
+            <button onclick="onOperate(event)">-</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="onNumber(event)">1</button>
+        </td>
+        <td>
+            <button onclick="onNumber(event)">2</button>
+        </td>
+        <td>
+            <button onclick="onNumber(event)">3</button>
+        </td>
+        <td>
+            <button onclick="onOperate(event)">+</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button onclick="onNumber(event)">0</button>
+        </td>
+        <td>
+            <button onclick="XiaoShuDian()">.</button>
+        </td>
+        <td>
+            <button onclick="onComput()">=</button>
+        </td>
+    </tr>
+</table>
+</body>
+<style type="text/css">
+    td {
+        width: 50px;
+        height: 40px;
+        text-align: center;
+    }
+
+    #res {
+        border: 1px solid #aaa;
+        text-align: right;
+        font-size: 1.5em;
+        padding: 0px 5px
+    }
+
+    button {
+        width: 100%;
+        height: 100%;
+        font-weight: bold;
+        font-size: 1.2em;
+        color: #444
+    }
+
+    table {
+        margin: 50px auto
+    }
+</style>
+</html>
