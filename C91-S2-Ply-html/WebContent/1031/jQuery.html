@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script type="text/javascript" 
+	src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<style>
+.cls {
+	border: 5px blue solid
+}
+
+</style>
+<script type="text/javascript">
+	// jQuery 的加载函数 ==> 替代  《 body onload
+	$(function(){
+		$("li").css("background-color","red");
+		
+		var jt = $(title);
+		jt.css("color","red") // dom 转 jQuery 对象
+		
+		var dt = jt[0];
+		
+		dt.style.backgroundColor = "blue";
+		
+		dt.style["background-color"] = "green"  // js 特有的访问对象属性的语法
+		
+		
+		var arr = [100,200,300];
+		
+		jQuery.each(  arr, function(i){
+			console.info(arr[i]);	
+		}); // 参数2 是回调函数
+		
+		// eq
+		$("li").eq(2).css("border","1px black solid")
+		
+		
+		console.info($("li").parent());
+		console.info($("li").parents());
+		
+		
+		// 向前想后查找
+		console.info($("#mli").next().text());
+		
+		console.info($("#mli").prev().text());
+		
+		
+		
+		// 属性操作  prop 只能获取标准属性， 自定义属性必须用 attr
+		console.info($("#title").attr("align"));
+		console.info($("#title").prop("align"));
+		
+		console.info($("#title").attr("notattr"));
+		console.info($("#title").prop("notattr"));
+		
+		// class 
+		console.info($("#title").prop("class"));
+		
+		$("#title").addClass("sty1");
+		$("#title").addClass("sty2");
+		
+		$("#title").removeClass("test");
+		
+		// 给标题添加点击事件
+		$("h3").click(function(){
+			//在 jquery 的函数中 this 对象表示的是被点击 dom 元素
+			//$(this).text("修改后的标题"); // innerHTML ==> html
+			$(this).html("<a href='https://taobao.com'>到淘宝</a>");
+			// 隐藏
+			//$("ul").hide("slow");
+			// 切换
+			//$("ul").toggle("slow");
+			console.info("-------");
+			// 自定义动画
+			$("ul").animate({ 
+				fontSize: "3em", 
+			  }, 3000);
+		});
+		
+	});
+	
+	
+	
+</script>
+
+</head>
+<body>
+<div>
+<p>
+	<h3 id="title" class="test" align="left"  notattr="test"  >灵魂拷问</h3>
+	<ul>
+		<li>你是谁？
+			是jQuery对DOM对象的重新包装后的对象
+		<li id="mli">从哪里来的？
+			通过jQuery选择器获取的对象
+		<li>要去干什么？
+			提供了一列简化操作的方法
+	</ul>
+	<button onclick='$("#title").toggleClass("cls");'>
+		切换 class
+	
+	</button>
+</p>
+</div>
+
+</body>
+</html>

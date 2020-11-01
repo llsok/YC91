@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>计算器</title>
+<script type="text/javascript">
+function Cal(){
+	//显示屏内容
+	this.display = 0;
+	
+	this.number1 = 0;
+	this.number2 = 0;
+	this.operator = ""; // +-*/
+	
+	// 加法
+	this.add = function(){}
+	// 减法
+	this.sub = function(){}
+	// 按键
+	this.number = function(num){
+		this.display = this.display * 10 + new Number(num);
+	}
+	
+	// 按下 = 键
+	this.comput = function(){
+		
+	}
+	
+	// 按下 +-*/
+	this.operate = function(){
+		
+	}
+	
+}
+
+// 创建计算器对象
+var cal = new Cal();
+
+function onNumber(e){
+	var btn = e.srcElement; // 获取当前触发事件的控件
+	var num = parseInt(btn.innerText);
+	cal.number(num);
+	res.innerText = cal.display;
+}
+
+</script>
+
+
+</head>
+<body>
+	<table style="border: 1px solid #000;">
+		<tr>
+			<td colspan="4" id="res">0</td>
+		</tr>
+		<tr>
+			<td><button>C</button></td>
+			<td><button>+/-</button></td>
+			<td><button>&lt;-</button></td>
+			<td><button>/</button></td>
+		</tr>
+		<tr>
+			<td><button onclick="onNumber(event)">7</button></td>
+			<td><button onclick="onNumber(event)">8</button></td>
+			<td><button onclick="onNumber(event)">9</button></td>
+			<td><button>*</button></td>
+		</tr>
+		<tr>
+			<td><button onclick="onNumber(event)">4</button></td>
+			<td><button onclick="onNumber(event)">5</button></td>
+			<td><button onclick="onNumber(event)">6</button></td>
+			<td><button>-</button></td>
+		</tr>
+		<tr>
+			<td><button onclick="onNumber(event)">1</button></td>
+			<td><button onclick="onNumber(event)">2</button></td>
+			<td><button onclick="onNumber(event)">3</button></td>
+			<td><button>+</button></td>
+		</tr>
+		<tr>
+			<td colspan="2"><button onclick="onNumber(event)">0</button></td>
+			<td><button>.</button></td>
+			<td><button>=</button></td>
+		</tr>
+	</table>
+</body>
+<style type="text/css">
+td {
+	width: 50px;
+	height: 40px;
+	text-align: center;
+}
+
+#res {
+	border: 1px solid #aaa;
+	text-align: right;
+	font-size: 1.5em;
+	padding: 0px 5px
+}
+
+button {
+	width: 100%;
+	height: 100%;
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #444
+}
+
+table {
+	margin: 50px auto
+}
+</style>
+</html>
