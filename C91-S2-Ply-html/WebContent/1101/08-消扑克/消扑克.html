@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>消扑克</title>
+<link href="css/matchgame.css" rel="stylesheet">
+<script type="text/javascript" 
+	src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+	<section id="game">
+		<div id="cards">
+			<div class="card" onclick="cg.open(0)"></div>
+			<div class="card" onclick="cg.open(1)"></div>
+			<div class="card" onclick="cg.open(2)"></div>
+			<div class="card" onclick="cg.open(3)"></div>
+			<div class="card" onclick="cg.open(4)"></div>
+			<div class="card" onclick="cg.open(5)"></div>
+			<div class="card" onclick="cg.open(6)"></div>
+			<div class="card" onclick="cg.open(7)"></div>
+			<div class="card" onclick="cg.open(8)"></div>
+			<div class="card" onclick="cg.open(9)"></div>
+			<div class="card" onclick="cg.open(10)"></div>
+			<div class="card" onclick="cg.open(11)"></div>
+		</div>
+	</section>
+	<script type="text/javascript">
+	//  用数字表示牌号， 0~51
+	//  0~12 黑桃  ， 13~25 红桃   梅花   方片 。。。
+	// 45    45 % 13 = 6   45 / 13 = 3  ==》 方片7
+	
+	function getCardImg(num){
+		var f = Math.floor(num / 13);
+		var n = num % 13;
+		f *= 120;
+		n *= 80;
+		return "-" + n + "px -" + f + "px";  
+	}
+	
+	function ClearGame(){
+		// 定义12张扑克牌
+		this.cards = new Array(12);
+		// 定义2次点开的牌
+		this.card1 = -1;
+		this.card2 = -1;
+		
+		// 开始游戏
+		this.start = function(){
+			// 随机生成12张牌
+			// i=>{} ==> function(i){} 箭头函数 ==> 朗母达表达式
+			$.each(this.cards, i=>{  
+				var n = Math.random() * 52;
+				this.cards[i] = Math.floor(n);
+			});
+			
+			// 复制前 6 张牌到后面来
+			// 复制前6个
+			var c06 = this.cards.slice(0,6);
+			// 删除后6个
+			this.cards.splice(6,6);
+			$.each(c06, i=>{  
+				this.cards.push(c06[i]);
+			});
+			
+			// 打乱纸牌
+			$.each(this.cards, i=>{
+				// 随机与第n张牌交换
+				var n = Math.floor(Math.random() * 12);
+				var temp = this.cards[i];
+				this.cards[i] = this.cards[n];
+				this.cards[n] = temp;
+			});
+			
+			// 验证
+			/*  */
+		}
+		
+		// 点开纸牌, index 表示当前点击的牌下标（编号 0 ~ 11）
+		this.open = function(index){
+			if(this.card1!=-1 && this.card2!=-1){
+				return ;
+			}
+			
+			// 翻开该牌
+			var img = getCardImg(this.cards[index]);
+			$(".card").eq(index).css("background-position",img);
+
+			if(this.card1 == -1){
+				// 记录翻开的第一张牌
+				this.card1 = index;
+			} else {
+				// 记录翻开的第二张牌
+				this.card2 = index;
+				// 判断
+				if(this.cards[this.card1] == this.cards[this.card2]){
+					window.setTimeout(()=>{
+						// 牌号相同, 消失
+						$(".card").eq(this.card1).css("visibility","hidden");
+						$(".card").eq(this.card2).css("visibility","hidden");
+						// 清空点击的牌
+						this.card1 = -1;
+						this.card2 = -1;
+					}, 1000);
+				} else {
+					window.setTimeout(()=>{
+						// 牌号不同, 翻过来
+						$(".card").eq(this.card1).css("background-position","0px -480px");
+						$(".card").eq(this.card2).css("background-position","0px -480px");
+						// 清空点击的牌
+						this.card1 = -1;
+						this.card2 = -1;
+					}, 1000);
+				}
+			}
+		}
+		
+		this.display = function(){
+			$.each(this.cards, i=>{  
+				var img = getCardImg(this.cards[i]);
+				$(".card").eq(i).css("background-position",img);
+			});
+		}
+		
+	}
+	
+	var cg = new ClearGame();
+	cg.start();
+	
+	</script>
+</body>
+</html>

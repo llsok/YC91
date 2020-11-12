@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form name="form1" action="" method="post">
+		用户名 <input type="text" id="uname" name="username" value=""
+			onblur="checkUserExists()" />
+		<div id="mess" style="display: inline"></div>
+	</form>
+</body>
+<script type="text/javascript">
+	// http://localhost/C91-S2-Ply-javaee/1111/CheckUserServlet?username=sss
+	//  @WebServlet("/1111/CheckUserServlet")
+	// http://localhost/C91-S2-Ply-javaee/CheckUserServlet?username=sss
+
+	function checkUserExists() {
+		var f = document.form1;
+		var username = f.username.value;
+		if (username == "") {
+			alert("用户名不能为空");
+			return false;
+		} else {
+			doAjax("../CheckUserServlet?username=" + username);
+		}
+	}
+
+	// 定义 XMLHttpRequest 
+	var xmlhttp;
+	function doAjax(url) {
+		// 创建 XMLHttpRequest 对象
+		// 浏览器兼容性问题
+		try {
+			xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try {
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {
+				try {
+					xmlhttp = new XMLHttpRequest();
+				} catch (e) {
+					alert("浏览器不支持 AJAX！");
+				}
+			}
+		}
+
+		// 回调函数， 当收到服务器返回的数据时，执行的函数
+		xmlhttp.onreadystatechange = processRequest;
+		xmlhttp.open("post", url, true); // 第三个参数 表示异步执行
+		xmlhttp.send(null);
+
+	}
+
+	function processRequest() {
+		var messdiv = document.getElementById("mess");
+		if (xmlhttp.readyState == 4) {
+			if (xmlhttp.status == 200) {
+				//responseText表示请求完成后，返回的字符串信息
+				if (xmlhttp.responseText == "false") {
+					messdiv.innerHTML = "用户名已被使用";
+				} else {
+					messdiv.innerHTML = "用户名可以使用";
+				}
+			} else {
+				alert("请求处理返回的数据有错误");
+			}
+		}
+	}
+</script>
+</html>

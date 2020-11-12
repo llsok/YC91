@@ -1,0 +1,19 @@
+jQuery: js包装 ==》 简化js操作
+
+jQuery 对象 ==》 $  ==》 DOM对象的包装
+
+1. 通过选择器： $("样式选择器")==》 代表多个DOM对象（数组）
+2. 与DOM互转： $(DOM对象)
+		jQuery对象==》DOM对象   $("#id")[0]
+3. html字符串构建：$("html标签语法") ==》 创建新元素
+
+jQuery常用方法
+1. 静态方法： $.方法名  ==> jQuery.方法
+			each， grep， toArray trim
+2. 对象方法
+	选择元素： 过滤，查找
+	文档操作： append, appentTo
+		要添加元素的元素.append(被添加的元素)
+		被添加的元素.appendTo(要添加元素的元素);
+	动态效果
+	。。。
