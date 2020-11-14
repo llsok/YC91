@@ -23,6 +23,16 @@ public class LoginServlet extends HttpServlet {
 		String account = request.getParameter("account");
 		// 获取账号
 		String pwd = request.getParameter("pwd");
+		// 获取请求中的验证码
+		String rvcode = request.getParameter("vcode");
+		// 获取会话中的验证码
+		String svcode = (String) request.getSession().getAttribute("vcode");
+		// 对比验证码
+		if(svcode.equalsIgnoreCase(rvcode) == false ) {
+			response.getWriter().append("-1");
+			return;
+		}
+		
 //		System.out.println("====="+account);
 //		System.out.println("====="+pwd);
 		

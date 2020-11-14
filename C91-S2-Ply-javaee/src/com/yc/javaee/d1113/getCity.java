@@ -16,10 +16,14 @@ public class getCity extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	String[][] citys = AreaConstants.CITYS;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, 
+			HttpServletResponse response) 
+					throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
+		// 获取选项的 索引
 		int name = Integer.parseInt(request.getParameter("pIndex"));
 		List<String> list = new ArrayList<>();
+		// 获取子列表
 		for(int i=0; i<citys[name].length;i++){
 			list.add(citys[name][i]);
 		}
@@ -27,7 +31,9 @@ public class getCity extends HttpServlet {
 		//System.out.println(list.toString());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, 
+			HttpServletResponse response) 
+					throws ServletException, IOException {
 		doGet(request, response);
 	}
 

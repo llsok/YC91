@@ -9,11 +9,18 @@ function login(){
 	
 	var url = "login.s?account=" + account.value + "&pwd=" + pwd.value;
 	
+	url += "&vcode=" + vcode.value;
+	
 	post( url, function(){
 		// 这里定义的是回调函数， 注意：要判断 2 个状态值
 		if(xmlhttp.readyState==4 && xmlhttp.status==200) {
 			if( xmlhttp.responseText == 1) {
 				alert("登录成功！");
+				// 直接通过 js 跳转到 main.html
+				// location 是 JS BOM 模型中的对象，用于表示浏览器当前的网址
+				location.href = "main.html";
+			} else if(xmlhttp.responseText == -1) {
+				alert("验证码错误！");
 			} else {
 				alert("登录失败！");
 			}
@@ -59,6 +66,13 @@ function post(url, callback) {
 	<form action="main.html">
 		账号：<input id="account" value=""><br>
 		密码：<input id="pwd"><br>
+		<!--http://localhost/1113/简单的企业MIS/VerifyCodeServlet
+			http://localhost/VerifyCodeServlet
+	正确的地址  http://localhost/C91-S2-Ply-javaee/VerifyCodeServlet-->
+		验证码：
+			<img src="../../VerifyCodeServlet" height="20px"
+				onclick="this.src='../../VerifyCodeServlet?a=' + new Date();">
+			<input id="vcode" maxlength="4" placeholder="点击图片更换验证码"><br>
 		<!-- button 默认是 提交按钮 -->
 		<button type="button" onclick="login()">登录</button>
 		<button formaction="register.html">注册</button>

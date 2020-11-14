@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 public class GetLoginedAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println(request.getSession().getId());
+		
 		HttpSession sess = request.getSession();
 		String la = (String)sess.getAttribute("loginedAccount");
 		response.getWriter().append(la);
