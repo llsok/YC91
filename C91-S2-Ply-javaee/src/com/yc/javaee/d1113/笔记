@@ -1,0 +1,39 @@
+AJAX: 实现异步加载（局部加载）
+
+XMLHttpRequest
+
+IE浏览器创建
+new XActiveObject("Microsoft.XMLHTTP");
+
+非IE浏览器创建
+new XMLHttpRequest();
+
+open(url);  // 开启连接
+setRequestHeader();  // 设置请求头参数
+send(params);	// 发送请求 params 是 post 请求的参数
+
+readystate 浏览器端状态
+	0~4  4：成功
+
+status		服务器端状态
+	100~500  200 成功
+
+onreadystatechange  回调函数 （js的函数可以当成变量传递）
+xmlhttp.onreadystatechange == function(){
+
+}
+
+返回结构
+responseText  ==》 文本形式
+responseXML   ==》 XML形式 封装成 document。getXXX
+
+
+
+
+
+
+
+
+
+
+

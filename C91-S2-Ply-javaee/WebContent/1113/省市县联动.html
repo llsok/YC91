@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>省市县联动</title>
+<script type="text/javascript"
+ src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js
+"></script>
+<style type="text/css">
+select{
+	width:100px
+}
+</style>
+<script type="text/javascript">
+</script>
+</head>
+<body>
+<div id="main">
+	<h3>AJAX实现省市联动</h3>
+	省:<select id="sheng" onchange="selectsheng()"></select>
+	市:<select id="shi" onchange="selectshi()"></select>
+	县:<select id="xian"></select>
+</div>
+
+<hr>
+
+</body>
+<script type="text/javascript">
+var pIndex;
+var cIndex;
+$.ajax({url:"../getProvince",
+	success:function(result){
+	var arr = result.split(/[^\u4e00-\u9fa5]+/ );
+	arr.pop();
+	arr.shift();
+	var getprovince="";
+	//console.info(arr);
+	for(var i in arr){
+		getprovince += "<option>"+arr[i]+"</option>";
+	}
+	sheng.innerHTML = getprovince;
+	selectsheng();
+}});
+
+function selectsheng(){
+	 pIndex = sheng.selectedIndex;
+	//var pid = $("#sheng").val();
+	//console.info(pIndex);
+	//doAjax("getCityServlet?pIndex=" + pIndex);
+	$.ajax({url:"../getCity?pIndex=" + pIndex,
+			success:function(result){
+			var arr = result.split(/[^\u4e00-\u9fa5]+/ );
+			arr.pop();
+			arr.shift();
+			var getcity="";
+			//console.info(arr);
+		for(var i in arr){
+			getcity += "<option>"+arr[i]+"</option>";
+		}
+		shi.innerHTML = getcity;
+		selectshi();
+       //console.info(result);
+	}});
+}
+
+function selectshi(){
+	 pIndex = sheng.selectedIndex;
+	 cIndex = shi.selectedIndex;
+	//console.info(cIndex);
+	$.ajax({url:"../getXian?pIndex=" + pIndex + "&&cIndex=" + cIndex,
+		success:function(result){
+		var arr = result.split(/[^\u4e00-\u9fa5]+/ );
+		arr.pop();
+		arr.shift();
+		var getxian="";
+		//console.info(arr);
+	for(var i in arr){
+		getxian += "<option>"+arr[i]+"</option>";
+	}
+	xian.innerHTML = getxian;
+}});
+}
+
+</script>
+</html>

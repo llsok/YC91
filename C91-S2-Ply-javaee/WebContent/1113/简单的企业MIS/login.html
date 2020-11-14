@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>企业MIS</title>
+<link rel="stylesheet" href="style.css">
+<script type="text/javascript">
+function login(){
+	
+	var url = "login.s?account=" + account.value + "&pwd=" + pwd.value;
+	
+	post( url, function(){
+		// 这里定义的是回调函数， 注意：要判断 2 个状态值
+		if(xmlhttp.readyState==4 && xmlhttp.status==200) {
+			if( xmlhttp.responseText == 1) {
+				alert("登录成功！");
+			} else {
+				alert("登录失败！");
+			}
+		}
+	});
+	
+}
+
+/**
+ * post 函数就是对 之前 doAjax 做的简单的封装， 添加一个回调函数的参数，其余的代码不变
+ */
+var xmlhttp;
+function post(url, callback) {
+	// 创建 XMLHttpRequest 对象
+	// 浏览器兼容性问题
+	try {
+		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	} catch (e) {
+		try {
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		} catch (e) {
+			try {
+				xmlhttp = new XMLHttpRequest();
+			} catch (e) {
+				alert("浏览器不支持 AJAX！");
+			}
+		}
+	}
+
+	// 回调函数， 当收到服务器返回的数据时，执行的函数
+	xmlhttp.onreadystatechange = callback;
+	xmlhttp.open("post", url, true); // 第三个参数 表示异步执行
+	xmlhttp.send(null);
+
+}
+
+</script>
+
+
+</head>
+<body>
+	<h2>登录页面</h2>
+	<form action="main.html">
+		账号：<input id="account" value=""><br>
+		密码：<input id="pwd"><br>
+		<!-- button 默认是 提交按钮 -->
+		<button type="button" onclick="login()">登录</button>
+		<button formaction="register.html">注册</button>
+	</form>
+</body>
+
+<script type="text/javascript">
+/* 当打开页面时， 检查 cookie 是否有 loginedAccount  "loginedAccount=aaaa; a=1"  */
+//通过正则表达式，获取cookie中存储的值
+var la = document.cookie.replace(/.*loginedAccount=(\w*).*/, "$1");
+
+if(la){
+	// 输出该值
+	console.info("==========="+la);
+	account.value = la;
+}
+</script>
+
+
+
+</html>
