@@ -26,10 +26,9 @@ public class getXian extends HttpServlet {
 		response.getWriter().append((list.toString()));
 		//System.out.println(list.toString());
 	}
-
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doGet(request, response);
 	}
 
 }
