@@ -1,6 +1,8 @@
 package com.yc.javaee.d1114;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +25,8 @@ public class VerifyCodeServlet extends HttpServlet {
 		String vcode = VerifyCodeUtils.outputImage(response);
 		// 将验证码保存到 Session 对象中
 		session.setAttribute("vcode", vcode);
+		// 在生成验证码的时刻，除了保存验证码，还保存一个时间值
+		session.setAttribute("vtime", new Date());
 	}
 
 }

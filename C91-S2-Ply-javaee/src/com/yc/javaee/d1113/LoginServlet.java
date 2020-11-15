@@ -1,6 +1,8 @@
 package com.yc.javaee.d1113;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -27,6 +29,17 @@ public class LoginServlet extends HttpServlet {
 		String rvcode = request.getParameter("vcode");
 		// 获取会话中的验证码
 		String svcode = (String) request.getSession().getAttribute("vcode");
+		// 获取会话中的验证码时间值
+		Date   svtime = (Date) request.getSession().getAttribute("vtime");
+		
+		// 计算时间差 （毫秒）
+		long time = System.currentTimeMillis() - svtime.getTime();
+		// 判断是否超时
+		if( time / 1000 > 10){
+			response.getWriter().append("-2");
+			return;
+		}
+		
 		// 对比验证码
 		if(svcode.equalsIgnoreCase(rvcode) == false ) {
 			response.getWriter().append("-1");

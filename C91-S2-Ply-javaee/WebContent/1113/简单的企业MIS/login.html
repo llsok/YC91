@@ -19,6 +19,8 @@ function login(){
 				// 直接通过 js 跳转到 main.html
 				// location 是 JS BOM 模型中的对象，用于表示浏览器当前的网址
 				location.href = "main.html";
+			} else if(xmlhttp.responseText == -2) {
+				alert("验证码超时！");
 			} else if(xmlhttp.responseText == -1) {
 				alert("验证码错误！");
 			} else {
@@ -71,8 +73,10 @@ function post(url, callback) {
 	正确的地址  http://localhost/C91-S2-Ply-javaee/VerifyCodeServlet-->
 		验证码：
 			<img src="../../VerifyCodeServlet" height="20px"
-				onclick="this.src='../../VerifyCodeServlet?a=' + new Date();">
-			<input id="vcode" maxlength="4" placeholder="点击图片更换验证码"><br>
+				onclick="this.src='../../VerifyCodeServlet?a=' + new Date(); time=10">
+			<input id="vcode" maxlength="4" placeholder="点击图片更换验证码">
+			<span id="timer"></span>
+			<br>
 		<!-- button 默认是 提交按钮 -->
 		<button type="button" onclick="login()">登录</button>
 		<button formaction="register.html">注册</button>
@@ -80,6 +84,21 @@ function post(url, callback) {
 </body>
 
 <script type="text/javascript">
+
+//设定一个计时器 初始值 60
+var time = 10;
+
+setInterval(function(){
+	if(time > 0){
+		time --;
+		timer.innerText = time;
+	} else {
+		timer.innerText = "请刷新验证码";
+	}
+	
+}, 1000);
+
+
 /* 当打开页面时， 检查 cookie 是否有 loginedAccount  "loginedAccount=aaaa; a=1"  */
 //通过正则表达式，获取cookie中存储的值
 var la = document.cookie.replace(/.*loginedAccount=(\w*).*/, "$1");
