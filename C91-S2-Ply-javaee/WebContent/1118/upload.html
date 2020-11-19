@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>文件上传</title>
+</head>
+<body>
+<!-- 
+	浏览器端URL地址中开头的 / 表示的路径是？
+	表示的 服务器 根目录 ==> 2
+	Servlet URL地址中开头的 / 表示的路径是？
+	表示的 项目 根目录   ==> 3
+	
+	http://localhost/C91-S2-Ply-javaee/1118/upload.html????
+		1			2				 3     4
+	
+	/upload.s 对的的浏览器的地址：
+	http://localhost/C91-S2-Ply-javaee/upload.s
+	
+  -->
+<h3>表单提交</h3>
+<form action="/C91-S2-Ply-javaee/upload.s" method="post" enctype="multipart/form-data">
+	<!-- 文件上传控件  -->
+	<input type="file" name="myfile">
+	<button>上传</button>
+</form>
+
+<h3>AJAX提交</h3>
+<script type="text/javascript" src="../d1116/js/jquery-1.9.1.js"></script>
+<!-- <script type="text/javascript" src="/C91-S2-Ply-javaee/d1116/js/jquery-1.9.1.js"></script> -->
+<form id="ff">
+	<!-- 文件上传控件  -->
+	<input type="file" name="myfile">
+	<button type="button" onclick="upload()">上传</button>
+</form>
+<script type="text/javascript">
+function upload(){
+	var filedata = new FormData(ff); // ff ==> form 的 document对象
+	$.ajax({
+		url : "/C91-S2-Ply-javaee/upload.s",
+		type: "POST",
+		data: filedata,
+		contentType: false,  // 文件上传必须设定 contentType 为false
+		processData: false,  // jQuery 默认会对发送参数进行处理，文件上传不需要处理
+		success: function(data){
+			alert(data);
+		}
+	});
+}
+</script>
+
+<h3>上传用户头像</h3>
+<form id="headform">
+	<!-- 文件上传控件  -->
+	<img alt="" src="" id="headimg" style="height: 180px;width: 120px; border: 1px #666 solid;">
+	<input type="file" name="myfile">
+	<button type="button" onclick="uploadImg()">上传</button>
+</form>
+<script type="text/javascript">
+function uploadImg(){
+	var filedata = new FormData(headform); // ff ==> form 的 document对象
+	$.ajax({
+		url : "/C91-S2-Ply-javaee/upload.s",
+		type: "POST",
+		data: filedata,
+		contentType: false,  // 文件上传必须设定 contentType 为false
+		processData: false,  // jQuery 默认会对发送参数进行处理，文件上传不需要处理
+		success: function(data){
+			// data 是字符串  ==》 json 字符串 ==》 js对象
+			data = JSON.parse(data);
+
+			headimg.src = "/C91-S2-Ply-javaee" + data.path;  //   /headiimgs/a.jpg
+			// /headiimgs/a.jpg ==> 
+			// http://localhost/headiimgs/a.jpg
+			
+			// /C91-S2-Ply-javaee/headiimgs/a.jpg ==>  
+			// http://localhost/C91-S2-Ply-javaee/headiimgs/a.jpg
+			
+			alert(data.msg);
+		}
+	});
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
