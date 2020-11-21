@@ -1,0 +1,13 @@
+文件上传：
+html
+	表单提交：form method=post enctype=multipart/form-data
+	AJAX提交： jQuery.ajax()
+			FormData(表单);
+servlet: Part 对象
+	request.getPart(表单文件字段名);
+	part.write("磁盘路径")
+	
+WEB路径 ==》磁盘路径
+磁盘路径 = ServletContext.getRealPath(WEB路径)
+
+eclipse: 开发目录， 运行目录   ==》 上传文档到运行目录， tomcat重启会导致上传文件清空

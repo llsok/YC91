@@ -73,7 +73,7 @@ function post(url, callback) {
 	正确的地址  http://localhost/C91-S2-Ply-javaee/VerifyCodeServlet-->
 		验证码：
 			<img src="../../VerifyCodeServlet" height="20px"
-				onclick="this.src='../../VerifyCodeServlet?a=' + new Date(); time=10">
+				onclick="this.src='../../VerifyCodeServlet?a=' + new Date(); time=60">
 			<input id="vcode" maxlength="4" placeholder="点击图片更换验证码">
 			<span id="timer"></span>
 			<br>
@@ -86,7 +86,7 @@ function post(url, callback) {
 <script type="text/javascript">
 
 //设定一个计时器 初始值 60
-var time = 10;
+var time = 60;
 
 setInterval(function(){
 	if(time > 0){

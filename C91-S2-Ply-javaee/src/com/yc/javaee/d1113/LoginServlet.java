@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		// 计算时间差 （毫秒）
 		long time = System.currentTimeMillis() - svtime.getTime();
 		// 判断是否超时
-		if( time / 1000 > 10){
+		if( time / 1000 > 60){
 			response.getWriter().append("-2");
 			return;
 		}

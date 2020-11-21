@@ -8,8 +8,9 @@
 </head>
 <body>
 	<h2>主页面</h2>
+	在线人数：<span id="cnt"></span>人<br>
 	<span id="name">欢迎：XXX</span>&nbsp;&nbsp;&nbsp;
-	<a href="login.html">退出</a><br>
+	<a href="logout.s">退出</a><br>
 	<a href="conf.html">系统设置</a><br>
 	<a href="report.html">财务报表</a><br>
 </body>
@@ -18,8 +19,9 @@
 /**
  * post 函数就是对 之前 doAjax 做的简单的封装， 添加一个回调函数的参数，其余的代码不变
  */
-var xmlhttp;
+
 function post(url, callback) {
+	var xmlhttp;
 	// 创建 XMLHttpRequest 对象
 	// 浏览器兼容性问题
 	try {
@@ -37,16 +39,22 @@ function post(url, callback) {
 	}
 
 	// 回调函数， 当收到服务器返回的数据时，执行的函数
-	xmlhttp.onreadystatechange = callback;
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+			callback(xmlhttp.responseText);
+		}
+	}
 	xmlhttp.open("post", url, true); // 第三个参数 表示异步执行
 	xmlhttp.send(null);
 }
 
-post("getLoginedAccount.s",function(){
-	if(xmlhttp.readyState==4 && xmlhttp.status==200){
+post("getLoginedAccount.s",function(data){
 		var myName = document.getElementById("name");
-		myName.innerText = "欢迎：" + xmlhttp.responseText;
-	}
+		myName.innerText = "欢迎：" + data;
+})
+
+post("../../userCount.s", function(data) {
+		cnt.innerText = data;
 })
 
 

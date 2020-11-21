@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>显示在线人数</title>
+<script type="text/javascript"
+	src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+</head>
+<body>
+	在线人数：<span id="cnt"></span>人
+</body>
+
+<script type="text/javascript">
+	$.get("../userCount.s", null, function(data) {
+		cnt.innerText = data;
+	})
+</script>
+</html>
