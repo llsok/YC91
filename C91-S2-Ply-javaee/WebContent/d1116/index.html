@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>歌手信息查询【分页查询】</title>
+<style type="text/css">
+div {
+	margin: 10px
+}
+select, button {
+	height: 24px
+}
+</style>
+
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="js/ajax.js"></script>
+
+<script type="text/javascript">
+// 当前的页数
+var page = 1
+// 总页数
+var pages = 0;
+
+// 查询方法
+function queryPage(){
+	doAjax("../ssQueryPage.s?page="+page,
+		function(reaponseText){ // doAjax => callback
+			// 解析 json 字符串 构建 js 对象
+			var list = JSON.parse(reaponseText);
+			// 将第一个tr转成 jQuery 对象   删除后面所有的tr
+			$("#singers tr:nth-child(1)").nextAll().remove();
+			var $table = $("#singers");
+			for( var i = 0; i< list.length ; i++){
+				var ss = list[i];
+				$table.append("<tr><td>"
+						+ss.id+"</td><td>"
+						+ss.nation+"</td><td>"
+						+ss.category+"</td><td>"
+						+ss.name+"</td><tr>")
+			}
+	});
+}
+function queryCount(){
+	doAjax("../ssQueryCount.s",
+			function(reaponseText){ // doAjax => callback
+				var count = parseInt(reaponseText);
+				pages = parseInt(count / 10);
+				if(count % 10 > 0){
+					pages ++;
+				}
+		});
+}
+
+
+function next(){
+	page += 1;
+	queryPage();
+}
+
+function last(){
+	page = pages;
+	queryPage();
+}
+
+// jQuery 加载函数 ==》 <body onlaod="..."
+$(function(){
+	queryPage();
+	queryCount();
+})
+
+
+
+</script>
+
+</head>
+<body>
+	<div style="text-align: center">
+		歌手：<input> 分类：<select><option>分类选项</option></select> 地区：<input>
+		<button>查询</button>
+	</div>
+	<table id="singers" border="1" style="width: 100%">
+		<tbody>
+			<tr>
+				<th width="15%">ID</th>
+				<th width="15%">地区</th>
+				<th width="35%">分类</th>
+				<th width="35%">名称</th>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>香港</td>
+				<td>华语男歌手</td>
+				<td>陈奕迅</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>台湾</td>
+				<td>华语男歌手</td>
+				<td>周杰伦</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>大陆</td>
+				<td>专辑合集</td>
+				<td>中国声音第一季</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>大陆</td>
+				<td>华语女歌手</td>
+				<td>曲婉婷</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>香港</td>
+				<td>华语乐队</td>
+				<td>BEYOND</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>香港</td>
+				<td>华语女歌手</td>
+				<td>邓紫棋</td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td>台湾</td>
+				<td>华语女歌手</td>
+				<td>阿桑</td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td>香港</td>
+				<td>华语女歌手</td>
+				<td>郑秀文</td>
+			</tr>
+			<tr>
+				<td>12</td>
+				<td>大陆</td>
+				<td>华语女歌手</td>
+				<td>庄心妍</td>
+			</tr>
+			<tr>
+				<td>15</td>
+				<td>香港</td>
+				<td>华语女歌手</td>
+				<td>杨千嬅</td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="pages" style="text-align: center;">
+		<select>
+			<option>每页10行</option>
+			<option>每页20行</option>
+			<option>每页50行</option>
+			<option>每页100行</option>
+		</select>
+		<button>首页</button>
+		<button>上一页</button>
+		<input id="page" value="" type="number"
+			style="text-align: center; width: 30px"> / 共<span id="count"></span>页
+		<button onclick="next()">下一页</button>
+		<button onclick="last()">尾页</button>
+	</div>
+	<h4>扩展功能</h4>
+	<ol>
+		<li>实现所有的翻页功能
+		<li>实现页内行数设置功能
+		<li>实现所有的组合条件查询，文本输入框条件使用模糊查询，下拉框使用精确查询
+		<li>添加成员（members）、生日（birthday）字段和头像（head）字段的展示
+		<li>实现点击列头（th）实现排序功能
+		<li>在每行最后添加一个“删除”按钮，实现删除功能
+	</ol>
+</body>
+</html>
