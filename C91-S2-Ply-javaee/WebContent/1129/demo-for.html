@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="tbl">
+<table border="1" style="width:100%">
+	<tr>
+		<th>序号</th>
+		<th>名称</th>
+		<th>型号</th>
+		<th>价格</th>
+		<th>数量</th>
+		<th>总价</th>
+	</tr>
+	<!-- 
+		p ： 循环变量（数组中的元素），i：元素下标值 
+		这里的 in 与 js 的 in 有区别
+	-->
+	<tr v-for=" (p,i) in pros ">
+		<td>{{i + 1}}</td>
+		<td>{{p.name}}</td>
+		<td>{{p.mode}}</td>
+		<td>{{p.price}}</td>
+		<td><button @click="p.count--">-</button>
+			{{p.count}}
+			<button @click="p.count++">+</button></td>
+		<td>{{p.price * p.count}}</td>
+	</tr>
+	<tr>
+		<td colspan="5">合计</td>
+		<td>{{sum}}</td> <!-- 计算属性 -->
+	</tr>
+</table>
+<button @click="add">新增</button>
+</div>
+
+<script type="text/javascript">
+	// 定义商品类
+	function Product(name, mode, price, count){
+		this.name = name;
+		this.mode = mode;
+		this.price = price;
+		this.count = count;
+	}
+	
+	var pros = [new Product("华为手机","Meta8", 2600,3),
+		new Product("OPPO手机","xxx8", 12004,5),
+		new Product("三星手机","yyy8", 7870,7),
+		new Product("苹果手机","zzz8", 5500,6)];
+
+	var v = new Vue({
+		el : "#tbl",
+		data : {
+			pros : pros
+		},
+		methods : {
+			add(){
+				var p = new Product("XYZ手机","eeee", 1500,7);
+				this.pros.push(p);  // api
+			}
+		},
+		computed : {
+			sum(){
+				var all = 0;
+				
+				/**
+					注意： 访问vue data 内部的属性，一定要加 this
+				*/
+				
+				/* for( var p in this.pros){
+					console.info(p); // p 数组元素的下标值
+					all += pros[p].price * pros[p].count;
+				} */
+				for( var p of this.pros){ // p 表示数据元素   低版本的js 不支持 of
+					all += p.price * p.count;
+				}
+				/* for (var i = 0; i < this.pros.length; i++) {
+					all += pros[i].price * pros[i].count;
+				} */
+				return all;
+			}
+		}
+	})
+
+</script>
+</body>
+</html>

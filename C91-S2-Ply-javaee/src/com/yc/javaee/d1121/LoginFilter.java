@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * urlPatterns 定义该过滤器要过滤的资源（html,jsp,css,js,jpg...） 服务器的 URL 配置格式： 1. 精确配置， / 开头
  * Servlet 2. 文件后缀配置， *.xxx Filter 3. 目录匹配 /dir/*
  */
-@WebFilter(urlPatterns = { "*.html" })
+//@WebFilter(urlPatterns = { "*.html" })
 public class LoginFilter implements Filter {
 
 	/**

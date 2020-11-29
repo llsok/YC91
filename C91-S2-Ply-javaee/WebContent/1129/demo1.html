@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<style type="text/css">
+img {
+	height: 100px
+}
+</style>
+</head>
+<body>
+	<div id="app">
+		<img v-if="img == 'i1'" src="下载.jpg">
+		<img v-if="img == 'i2'" alt="" src="part-00101-367.jpg">
+		<br>
+		<input type="radio" value="i1" v-model="img">图一
+		<input type="radio" value="i2" v-model="img">图二
+		
+		<hr>
+		<img v-if="img1 == 'i1'" src="下载.jpg">
+		<img v-else alt="" src="part-00101-367.jpg">
+		<br>
+		<input type="radio" value="i1" v-model="img1">图一
+		<input type="radio" value="i2" v-model="img1">图二
+		
+		<hr>
+		<img v-if="img2 == 'i1'" src="下载.jpg">
+		<img v-else-if="img2 == 'i2'" src="下载 (1).jpg">
+		<img v-else alt="" src="part-00101-367.jpg">
+		<br>
+		<input type="radio" value="i1" v-model="img2">图一
+		<input type="radio" value="i2" v-model="img2">图二
+		<input type="radio" value="i3" v-model="img2">图二
+		
+		
+		<hr>
+		<img v-show="img1 == 'i1'" src="下载.jpg">
+		<img v-show="img1 == 'i2'" alt="" src="part-00101-367.jpg">
+		<br>
+		<input type="radio" value="i1" v-model="img1">图一
+		<input type="radio" value="i2" v-model="img1">图二
+		
+		<!-- 
+			v-if 在切换html元素 是重新生成元素
+			v-show 在切换html元素 是修改元素的 display:none
+		 -->
+		
+	</div>
+	<script type="text/javascript">
+		var v = new Vue({
+			el : "#app",
+			data : {
+				img : "i1",
+				img1 : "i1",
+				img2 : "i1"
+			}
+		})
+	</script>
+</body>
+</html>
