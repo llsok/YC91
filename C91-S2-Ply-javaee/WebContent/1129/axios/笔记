@@ -1,0 +1,21 @@
+回调地狱
+
+jQuery.ajax(post,get...)
+
+// 异步调用
+// 回调地狱
+jQuery.get( url 地址, params 参数, function(data){
+	//...省略...
+	jQuery.get( url 地址, params 参数, function(data){
+		//...省略...
+		jQuery.get( url 地址, params 参数, function(data){
+			//...省略...
+		})
+	})
+})
+
+// 链式调用
+promise().then().then().then()...
+
+
+
