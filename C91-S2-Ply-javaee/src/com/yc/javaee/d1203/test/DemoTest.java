@@ -1,5 +1,8 @@
 package com.yc.javaee.d1203.test;
 
+/**
+ * 作业： 完成MyBefore 和 MyAfter 注解定义和使用
+ */
 public class DemoTest {
 	
 	// @MyBefore  	可选
