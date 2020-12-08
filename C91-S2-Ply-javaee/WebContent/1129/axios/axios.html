@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+<body>
+<h1>GET请求</h1>
+<div id="app">
+<input v-model="num1"> + <input v-model="num2"> = <span>{{result}}</span>
+<button @click="add">计算</button>
+</div>
+<script type="text/javascript">
+var v = new Vue({
+	el : "#app",
+	data : {
+		num1 : 0,
+		num2 : 1,
+		result: 0
+	},
+	methods : {
+		add(){
+			// get 请求 发送的数据量有限制
+			axios.get("../../add.do", {
+				// params 表示发送给服务器的参数集合
+				params : {
+					num1 : this.num1,
+					num2 : this.num2,
+				}
+			// 箭头函数 （可以使用 this 指代 vue对象 v） ~= 匿名函数（回调函数）		
+			}).then((res)=>{
+				this.result = res.data;
+			});
+		}
+	}
+})
+
+</script>
+
+
+
+<h1>POST请求</h1>
+<div id="app1">
+<input v-model="num1">
+<select v-model="oper">
+	<option>+</option>
+	<option>-</option>
+	<option>*</option>
+	<option>/</option>
+	<option>%</option>
+</select>
+<input v-model="num2"> = <span>{{result}}</span>
+<button @click="add">计算</button>
+</div>
+<script type="text/javascript">
+var v = new Vue({
+	el : "#app1",
+	data : {
+		num1 : 0,
+		num2 : 0,
+		oper : "+", 
+		result: 0
+	},
+	methods : {
+		add(){
+			// post 请求 发送的数据量没有限制
+			var p = new URLSearchParams();  // 用于封装post请求参数
+			//p.append("参数名","参数值");
+			p.append("num1",this.num1);
+			p.append("num2",this.num2);
+			p.append("oper",this.oper);
+			axios.post("../../add.do", p).then((res)=>{
+				this.result = res.data;
+			});
+		}
+	}
+})
+</script>
+
+
+<h1>文件上传</h1>
+<form id="ff">
+	<img :src="imgsrc" height="100px">
+	<input type="file" name="imgfile">
+	<button @click.prevent="upload">上传</button>
+</form> 
+<script type="text/javascript">
+	new Vue({
+		el : "#ff",
+		data : {
+			imgsrc : "下载.jpg"
+		},
+		methods : {
+			upload(){
+				// 构建文件上传的对象
+				var fd = new FormData(ff);
+				// 请求配置
+				let config = {
+		         	headers: {
+		         		// 表示当前的post请示是用于上传文件
+		               'Content-Type': 'multipart/form-data'
+		         	}
+				};
+				axios.post("../../upload.do", fd, config).then( res=>{
+					this.imgsrc = res.data;
+				});
+			}
+		}
+	})
+
+</script>
+
+
+
+</body>
+</html>
