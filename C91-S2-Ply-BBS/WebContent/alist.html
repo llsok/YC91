@@ -5,9 +5,8 @@
 <TITLE>论坛--帖子列表</TITLE>
 
 <Link rel="stylesheet" type="text/css" href="style/style.css" />
-<script type="text/javascript" src="js/vue.min.js"></script>
-<script type="text/javascript" src="js/axios.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
 </HEAD>
 
 <BODY>
@@ -23,7 +22,7 @@
 
 
 <!--      主体        -->
-<DIV id="main">
+<DIV>
 <!--      导航        -->
 <br/>
 <DIV>
@@ -33,7 +32,7 @@
 <br/>
 <!--      新帖        -->
 	<DIV>
-		<A :href="'post.html' + location.search"><IMG src="image/post.gif" name="td_post" border="0" id=td_post></A>
+		<A href="post.html"><IMG src="image/post.gif" name="td_post" border="0" id=td_post></A>
 	</DIV>
 <!--         翻 页         -->
 	<DIV>
@@ -41,7 +40,7 @@
 		<a href="list.html">下一页</a>
 	</DIV>
 
-	<DIV class="t">
+	<DIV class="t" id="m">
 		<TABLE cellSpacing="0" cellPadding="0" width="100%">		
 			<TR>
 				<TH class="h" style="WIDTH: 100%" colSpan="4"><SPAN>&nbsp;</SPAN></TH>
@@ -55,46 +54,46 @@
 			</TR>
 <!--         主 题 列 表        -->
 			
-			<TR class="tr3" v-for=" t in list">
+			<TR class="tr3" v-for=" s in list">
 				<TD><IMG src="image/topic.gif" border=0></TD>
 				<TD style="FONT-SIZE: 15px">
-					<A :href="'detail.html?id='+t.id">{{t.title}}</A>
+					<A :href=" 'detail.html?id=' + s.id">{{s.title}}</A>
 				</TD>
-				<TD align="center">{{t.uname}}</TD>
-				<TD align="center">{{t.cnt}}</TD>
+				<TD align="center">{{s.uname}}</TD>
+				<TD align="center">{{s.cnt}}</TD>
 			</TR>
 			
 			
+			
 		</TABLE>
+		
+		<script type="text/javascript">
+	var v=new Vue({
+		el:"table",
+		data:{
+			list:[]
+		},
+		created(){
+			var search=location.search;
+			var items=search.split(/=/);
+			var bid=items[1];
+			axios.get("topic.s?op=queryByBid&bid="+bid).then(res=>{
+				this.list=res.data;
+				console.info(this.list);
+			})
+		}	
+	});	
+	</script>
 	</DIV>
+	
+	
+	
 <!--            翻 页          -->
 	<DIV>
 		<a href="list.html">上一页</a>|
 		<a href="list.html">下一页</a>
 	</DIV>
 </DIV>
-<script type="text/javascript">
-var v = new Vue({
-	el : "#main",
-	data : {
-		list : []				
-	},
-	created(){
-		// topic.s?op=queryById
-		var search = location.search; // ?bid=5;
-		// repalce  split
-		var items = search.split(new RegExp("="));
-		var bid = items[1];
-		var url = "topic.s?op=queryByBid&bid=" + bid; 
-		axios.get(url).then(res=>{
-			this.list = res.data;
-			// servlet ==> 集合
-		})
-	}
-})
-
-</script>
-
 <!--             声 明          -->
 <BR/>
 <CENTER class="gray">源辰信息</CENTER>

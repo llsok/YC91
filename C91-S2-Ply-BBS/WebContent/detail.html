@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <TITLE>论坛--看贴</TITLE>
 <Link rel="stylesheet" type="text/css" href="style/style.css" />
+
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/axios.min.js"></script>
+
 </HEAD>
 
 <BODY>
@@ -19,7 +23,7 @@
 	</DIV>
 
 <!--      主体        -->
-<DIV><br/>
+<DIV id="main"><br/>
 	<!--      导航        -->
 <DIV>
 	&gt;&gt;<B><a href="index.html">论坛首页</a></B>&gt;&gt;
@@ -50,73 +54,48 @@
 	
 	<!--      主题        -->
 	
-	<DIV class="t">
+	<DIV class="t" v-for="t in list">
 		<TABLE style="BORDER-TOP-WIDTH: 0px; TABLE-LAYOUT: fixed" cellSpacing="0" cellPadding="0" width="100%">
 			<TR class="tr1">
 				<TH style="width: 20%">
-					<B>t</B><BR/>
-					<image src="image/head/2.gif"/><BR/>
-					注册:2007-07-27<BR/>
+					<B>{{t.uname}}</B><BR/>
+					<image :src="'image/head/' + t.head"/><BR/>
+					注册:{{t.regtime}}<BR/>
 				</TH>
 				<TH>
-					<H4>灌水</H4>
-					<DIV>rt</DIV>
+					<H4>{{t.title}}</H4>
+					<DIV v-html="t.content"></DIV>
 					<DIV class="tipad gray">
-						发表：[2007-07-30 08:37] &nbsp;
-						最后修改:[2007-07-30 08:37]
+						发表：[{{t.publishtime}}] &nbsp;
+						最后修改:[{{t.modifytime}}]
 					</DIV>
 				</TH>
 			</TR>
 		</TABLE>
 	</DIV>
-	
-	<!--      回复        -->
-	
-	<DIV class="t">
-		<TABLE style="BORDER-TOP-WIDTH: 0px; TABLE-LAYOUT: fixed" cellSpacing="0" cellPadding="0" width="100%">
-			<TR class="tr1">
-				<TH style="WIDTH: 20%">
-					<B>t</B><BR/><BR/>
-					<image src="image/head/2.gif"/><BR/>
-					注册:2007-07-27<BR/>
-				</TH>
-				<TH>
-					<H4>继续灌</H4>
-					<DIV>继续灌</DIV>
-					<DIV class="tipad gray">
-						发表：[2007-07-30 10:32] &nbsp;
-						最后修改:[2007-07-30 08:37]
-						<A href="">[删除]</A>
-						<A href="">[修改]</A>
-					</DIV>
-				</TH>
-			</TR>
-		</TABLE>
-	</DIV>
-	
-	<DIV class="t">
-		<TABLE style="BORDER-TOP-WIDTH: 0px; TABLE-LAYOUT: fixed" cellSpacing="0" cellPadding="0" width="100%">
-			<TR class="tr1">
-				<TH style="WIDTH: 20%">
-					<B>t</B><BR/><BR/>
-					<image src="image/head/2.gif"/><BR/>
-					注册:2007-07-27<BR/>
-				</TH>
-				<TH>
-					<H4>继续灌</H4>
-					<DIV>板凳</DIV>
-					<DIV class="tipad gray">
-						发表：[2007-07-30 10:32] &nbsp;
-						最后修改:[2007-07-30 08:37]
-						<A href="">[删除]</A>
-						<A href="">[修改]</A>
-					</DIV>
-				</TH>
-			</TR>
-		</TABLE>
-	</DIV>
-	
 </DIV>
+
+<script type="text/javascript">
+var v = new Vue({
+	el : "#main",
+	data : {
+		list : []				
+	},
+	created(){
+		// topic.s?op=queryById
+		var search = location.search; // ?bid=5;
+		// repalce  split
+		var items = search.split(new RegExp("="));
+		var id = items[1];
+		var url = "topic.s?op=selectByIdWithReply&id=" + id; 
+		axios.get(url).then(res=>{
+			this.list = res.data;
+			// servlet ==> 集合
+		})
+	}
+})
+
+</script>
 
 <!--      声明        -->
 <BR>

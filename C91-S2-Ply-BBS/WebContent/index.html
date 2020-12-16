@@ -44,7 +44,7 @@
 			<TD width="5%">&nbsp;</TD>
 			<TH align="left">
 				<IMG src="image/board.gif">
-				<A href="list.html">{{subboard.boardname}}</A>
+				<A :href="'list.html?bid=' + subboard.id">{{subboard.boardname}}</A>
 			</TH>
 			<TD align="center">{{subboard.cnt}}</TD>
 			<TH>
