@@ -47,7 +47,7 @@ public class RedisBiz {
 			jedis.close();
 		}
 		
-	}
+	}`
 	
 	public int getZan(String topicid){
 		Jedis jedis = jedisPool.getResource();
