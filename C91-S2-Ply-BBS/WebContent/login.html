@@ -28,14 +28,54 @@
 			<form name="loginForm" action="" method="post">
 				<br>
 				<label>用户名</label>
-				<input tabindex="1" type="text" maxlength="20" size="35" name="uName" class="input">
+				<input v-model="uname" tabindex="1" type="text" maxlength="20" size="35" name="uName" class="input">
 				<br>
 				<label>密 码</label>
-				<input tabindex="2" type="password" maxlength="20" size="35" name="uPass" class="input">
+				<input v-model="upass" tabindex="2" type="password" maxlength="20" size="35" name="uPass" class="input">
 				<br>
-				<input tabindex="6" type="button" value="登 录" class="btn">
+				<input @click="login()" tabindex="6" type="button" value="登 录" class="btn">
 			</form>
 		</div>
+		<script type="text/javascript">
+		var v=new Vue({
+			el:".t",
+			data:{
+				uname:"",
+				upass:"",
+			},
+			created(){
+			      var t = this;
+			      document.onkeydown = function(e){
+			        if(window.event == undefined){
+			          var key = e.keyCode;
+			        }else{
+			          var key = window.event.keyCode;
+			        }
+			      //enter的ASCII码是13
+			        if(key == 13){
+			          t.login();
+			        }
+			      }
+			    },	methods:{
+				login(){
+					var p=new URLSearchParams();
+					p.append("uname",this.uname);
+					p.append("upass",this.upass);
+					axios.post("Logincheck.s?op=Logincheck",p).then(res=>{
+						alert(res.data);
+						if(res.data=="登录成功"){
+							location.href="index.html";
+						}else{
+							location.href="login.html";
+						}
+					});
+				}
+			}
+		});
+		
+		</script>
+		
+		
 	</div>
 </body>
 </html>
