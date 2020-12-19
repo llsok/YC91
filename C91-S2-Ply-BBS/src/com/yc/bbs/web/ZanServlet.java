@@ -21,7 +21,7 @@ public class ZanServlet extends HttpServlet {
 		// 从会话中获取当前登录人的id 
 		String uid = "1";
 		rbiz.zan(tid, uid);
-		response.getWriter().append(" zan success !!!");
+		response.getWriter().append(" zan 成功 !!!");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
