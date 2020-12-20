@@ -70,7 +70,7 @@ public class TopicServlet extends BaseServlet{
 				(Map<String, Object>) request.getSession()
 					.getAttribute("loginedUser");
 		Object uid = loginedUser.get("uid");*/
-		Object uid = 3;
+		Object uid = 1;
 		
 		try {
 			tbiz.reply(title, content, uid, topicid);
