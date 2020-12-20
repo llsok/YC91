@@ -23,5 +23,20 @@ public class TopicBiz {
 		}
 		
 	}
+	
+	public void reply(String title, String content,
+			Object uid, String topicid) throws BizException {
+		// 验证用户的输入
+		Utils.checkNull(title,"标题不能为空");
+		Utils.checkNull(content,"内容不能为空");
+		
+		
+		try {
+			tdao.insertReply(title, content, uid, topicid);
+		} catch (SQLException e) {
+			throw new BizException("系统繁忙，请求稍后再试",e);
+		}
+		
+	}
 
 }
