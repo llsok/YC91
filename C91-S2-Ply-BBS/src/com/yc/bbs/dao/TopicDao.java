@@ -48,7 +48,7 @@ public class TopicDao {
 				"			WHERE\n" +
 				"				topicid = ?\n" +
 				"	) a\n" +
-				"JOIN tbl_user b ON a.uid = b.id";
+				"JOIN tbl_user b ON a.uid = b.id order by publishtime";
 		return DBHelper.selectListMap(sql, id, id);
 	}
 
@@ -59,5 +59,9 @@ public class TopicDao {
 		DBHelper.update(sql, title,content,uid,boardid);
 	}
 	
+	public void insertReply(String title,String content,Object uid,String topicid) throws SQLException {
+		String sql = "insert into tbl_reply values(null,?,?,now(),null,?,?)";
+		DBHelper.update(sql, title,content,uid,topicid);
+	}
 
 }

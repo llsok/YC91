@@ -21,5 +21,17 @@ public class Utils {
 			}
 		}
 	}
+	
+	/**
+	 * 将对象转为字符串
+	 * @param obj
+	 * @return
+	 */
+	public static String objToString(Object obj){
+		if(null==obj){
+			return null;
+		}
+		return obj.toString();
+	}
 
 }

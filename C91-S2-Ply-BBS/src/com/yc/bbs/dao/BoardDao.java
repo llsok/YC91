@@ -13,10 +13,11 @@ public class BoardDao {
 	 * @return
 	 */
 	public List<?> query(){
-		String sql = "SELECT\n" +
+		String sql ="SELECT\n" +
 				"	a.*, b.*, c.title,\n" +
 				"	c.uid,\n" +
-				"	c.publishtime\n" +
+				"	c.publishtime,\n" +
+				"	d.*\n" +
 				"FROM\n" +
 				"	tbl_board a\n" +
 				"LEFT JOIN (\n" +
@@ -36,13 +37,29 @@ public class BoardDao {
 				"	WHERE\n" +
 				"		a.id IN (\n" +
 				"			SELECT\n" +
-				"				max(id)\n" +
+				"				MAX(id)\n" +
 				"			FROM\n" +
 				"				tbl_topic\n" +
 				"			GROUP BY\n" +
 				"				boardid\n" +
 				"		)\n" +
-				") c ON a.id = c.boardid";
+				") c ON a.id = c.boardid\n" +
+				"LEFT JOIN (\n" +
+				"	SELECT\n" +
+				"		*\n" +
+				"	FROM\n" +
+				"		tbl_user u\n" +
+				"	WHERE\n" +
+				"		u.id IN (\n" +
+				"			SELECT\n" +
+				"				uid\n" +
+				"			FROM\n" +
+				"				tbl_topic\n" +
+				"			GROUP BY\n" +
+				"				uid\n" +
+				"		)\n" +
+				") d ON d.id = c.uid";
+		
 		try {
 			return DBHelper.selectListMap(sql);
 		} catch (SQLException e) {

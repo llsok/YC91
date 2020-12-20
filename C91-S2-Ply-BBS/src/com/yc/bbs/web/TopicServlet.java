@@ -58,4 +58,26 @@ public class TopicServlet extends BaseServlet{
 		}
 	}
 
+	public void reply(HttpServletRequest request, 
+			HttpServletResponse response) 
+					throws IOException, SQLException{
+		String topicid = request.getParameter("topicid");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		// 发帖的前提：用户必须登录==》会话中有 loginedUser
+		/*@SuppressWarnings("unchecked")
+		Map<String,Object> loginedUser = 
+				(Map<String, Object>) request.getSession()
+					.getAttribute("loginedUser");
+		Object uid = loginedUser.get("uid");*/
+		Object uid = 1;
+		
+		try {
+			tbiz.reply(title, content, uid, topicid);
+			write(response, Result.success("回帖成功！"));
+		} catch (BizException e) {
+			e.printStackTrace();
+			write(response, Result.failure(e.getMessage()));
+		}
+	} 
 }
