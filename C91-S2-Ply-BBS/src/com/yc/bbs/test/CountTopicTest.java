@@ -12,7 +12,7 @@ public class CountTopicTest {
 	@Test
 	public void test() throws SQLException {
 
-		System.out.println(dao.selectTotalByBid("5"));
+		//System.out.println(dao.selectTotalByBid("5"));
 		
 	}
 
