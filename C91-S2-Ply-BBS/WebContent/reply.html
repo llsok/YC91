@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>论坛--回帖</title>
+<link rel="stylesheet" type="text/css" href="style/style.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+
+<body>
+	<div id="main">
+		<div>
+			<div>
+				<img src="image/logo.gif">
+			</div>
+			<div class="h">
+				<span>
+					您尚未 <a href="login.html">登录</a> &nbsp;| &nbsp; <a href="reg.html">注册</a> |
+				</span>
+			</div>
+		</div>
+		<br>
+		<div>
+			&gt;&gt;<b><a href="index.html">论坛首页</a></b>
+		</div>
+		<div align="center" class="t">
+			<form name="loginForm" action="" method="post">
+				<br>
+				<label>标题</label>
+				<input tabindex="1" type="text" maxlength="20" size="35"
+					v-model="params.title" class="input">
+				<br>
+				<label>内容</label>
+				<textarea rows="5" cols="30"
+					v-model="params.content"></textarea>
+				<br>
+				<input tabindex="6" type="button" value="发 帖" class="btn"
+					@click="post">
+			</form>
+			<script type="text/javascript">
+			var v = new Vue({
+				el : "form",
+				data : {
+					params : {
+						title : "",
+						content : "",
+						topicid : ""
+					}
+				},
+				methods : {
+					post(){
+						// topic.s?op=queryById
+						var search = location.search; // ?bid=5;
+						// repalce  split
+						var items = search.split(new RegExp("="));
+						var bid = items[1];
+						this.params.topicid = bid;
+						
+						var postParams = new URLSearchParams();
+						for( var field in this.params){
+							// 对象循环，会将对象的每个属性名，赋值给一个循环变量
+							postParams.append(field,this.params[field]);
+						}
+						var url = "topic.s?op=reply"
+						axios.post(url, postParams).then(res=>{
+							if(res.data.code){
+								location.href="detail.html?topicid=" + this.params.topicid;
+							} else {
+								alert(res.data.msg);
+							}
+						})
+						
+					}
+				}
+			})
+			
+			
+			
+			</script>
+		</div>
+	</div>
+</body>
+</html>

@@ -32,7 +32,7 @@
 	<br/>
 	<!--      回复、新帖        -->
 	<DIV>
-		<A href="post.html"><IMG src="image/reply.gif"  border="0" id=td_post></A> 
+		<A :href="'reply.html'+location.search"><IMG src="image/reply.gif"  border="0" id=td_post></A> 
 		<A href="post.html"><IMG src="image/post.gif"   border="0" id=td_post></A>
 	</DIV>
 	<!--         翻 页         -->
@@ -93,6 +93,10 @@ var v = new Vue({
 			// servlet ==> 集合
 		})
 	}
+})
+
+var vue = new Vue({
+	el:""
 })
 
 </script>
