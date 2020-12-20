@@ -59,25 +59,6 @@ public class BoardDao {
 				"				uid\n" +
 				"		)\n" +
 				") d ON d.id = c.uid";
-
-		/**
-		 * +
-				"LEFT JOIN (\n" +
-						"	SELECT\n" +
-						"		*\n" +
-						"	FROM\n" +
-						"		tbl_user u\n" +
-						"	WHERE\n" +
-						"		u.id IN (\n" +
-						"			SELECT\n" +
-						"				uid\n" +
-						"			FROM\n" +
-						"				tbl_topic\n" +
-						"			GROUP BY\n" +
-						"				uid\n" +
-						"		)\n" +
-						") d ON d.id = c.uid"
-		 */
 		
 		try {
 			return DBHelper.selectListMap(sql);
