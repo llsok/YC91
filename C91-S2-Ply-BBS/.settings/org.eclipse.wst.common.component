@@ -5,6 +5,7 @@
                         
         
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/" source-path="/"/>
                         
         
         <property name="context-root" value="C91-S2-Ply-BBS"/>
