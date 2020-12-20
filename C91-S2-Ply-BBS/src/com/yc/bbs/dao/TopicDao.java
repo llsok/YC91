@@ -51,6 +51,7 @@ public class TopicDao {
 				"JOIN tbl_user b ON a.uid = b.id";
 		return DBHelper.selectListMap(sql, id, id);
 	}
+	
 
 	public void insert(String title, String content, 
 			Object uid, String boardid) throws SQLException {
